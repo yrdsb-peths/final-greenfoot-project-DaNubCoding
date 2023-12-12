@@ -3,6 +3,8 @@ import greenfoot.*;
 public class MainGame extends Scene {
     public MainGame() {
         super();
-        new Player(this);
+        for (int i = 0; i < 20; i++) {
+            new Player(this);
+        }
     }
 }

@@ -1,6 +1,8 @@
 import greenfoot.*;
 
 public class Scene extends World {
+    public static final int PX = 4; // Pixel size
+    
     public int w;
     public int h;
     

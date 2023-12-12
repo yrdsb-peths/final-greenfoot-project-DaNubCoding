@@ -1,11 +1,11 @@
 import greenfoot.*;
 
-public class Player extends Sprite<MainGame> {
+public class Player extends Sprack {
     public Player(MainGame scene) {
-        super(scene, scene.w / 2, scene.h / 2);
+        super(scene, Greenfoot.getRandomNumber(scene.w), Greenfoot.getRandomNumber(scene.h), "player_test.png", 16);
     }
     
     public void tick() {
-        
+        this.angle++;
     }
 }
