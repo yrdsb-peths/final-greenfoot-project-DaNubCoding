@@ -13,6 +13,11 @@ public abstract class Sprite<T extends Scene> extends Actor {
     public void act() {
         this.tick();
     }
+    
+    public void setImage(GreenfootImage image) {
+        super.setImage(image);
+        this.image = this.getImage();
+    }
 
     public abstract void tick();
 }
