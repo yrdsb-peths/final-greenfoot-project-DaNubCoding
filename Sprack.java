@@ -98,8 +98,11 @@ public class Sprack extends Sprite<MainGame> {
     }
     
     protected void setAngle(int angle) {
-        this.angle = angle % 360;
-        this.setImage(this.rotationImages[this.angle]);
+        this.angle = angle;
+    }
+    
+    protected GreenfootImage getRotationImage(double angle) {
+        return this.rotationImages[Math.floorMod((int) angle, 360)];
     }
     
     public Vector getPos() {
@@ -107,6 +110,10 @@ public class Sprack extends Sprite<MainGame> {
     }
     
     public void tick() {
-        this.setLocation(this.pos.minus(this.scene.camera.getPos()));
+        this.setImage(this.getRotationImage(this.angle - this.scene.camera.getAngle()));
+        Vector screenPos = this.pos.minus(this.scene.camera.getPos());
+        screenPos = screenPos.rotate((int) this.scene.camera.getAngle());
+        screenPos = screenPos.plus(new Vector(this.scene.w / 2, this.scene.h / 2));
+        this.setLocation(screenPos);
     }
 }

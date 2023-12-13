@@ -22,8 +22,8 @@ public class Vector {
     }
     
     public Vector rotate(int angle) {
-        double x = Math.cos(angle) * this.x - Math.sin(angle) * this.y;
-        double y = Math.sin(angle) * this.x + Math.cos(angle) * this.y;
+        double x = Math.cos(angle * Math.PI / 180) * this.x - Math.sin(angle * Math.PI / 180) * this.y;
+        double y = Math.sin(angle * Math.PI / 180) * this.x + Math.cos(angle * Math.PI / 180) * this.y;
         return new Vector(x, y);
     }
 }

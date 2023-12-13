@@ -19,6 +19,13 @@ public class Player extends Sprack {
             this.pos.x += 5;
         }
         
+        if (Greenfoot.isKeyDown("q")) { // CCW
+            this.setAngle(this.angle - 2);
+        }
+        if (Greenfoot.isKeyDown("e")) { // CW
+            this.setAngle(this.angle + 2);
+        }
+        
         super.tick();
     }
 }
