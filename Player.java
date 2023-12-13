@@ -1,8 +1,8 @@
 import greenfoot.*;
 
 public class Player extends Sprack {
-    public Player(MainGame scene) {
-        super(scene, 0, 0, "player.png", 32);
+    public Player(MainGame scene, SprackGroup group) {
+        super(scene, group, 0, 0);
     }
     
     public void tick() {
