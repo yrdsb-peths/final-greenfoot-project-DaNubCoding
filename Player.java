@@ -2,10 +2,23 @@ import greenfoot.*;
 
 public class Player extends Sprack {
     public Player(MainGame scene) {
-        super(scene, Greenfoot.getRandomNumber(scene.w), Greenfoot.getRandomNumber(scene.h), "player.png", 32);
+        super(scene, 0, 0, "player.png", 32);
     }
     
     public void tick() {
-        this.setAngle(this.angle + 1);
+        if (Greenfoot.isKeyDown("w")) { // up
+            this.pos.y -= 5;
+        }
+        if (Greenfoot.isKeyDown("s")) { // down
+            this.pos.y += 5;
+        }
+        if (Greenfoot.isKeyDown("a")) { // left
+            this.pos.x -= 5;
+        }
+        if (Greenfoot.isKeyDown("d")) { // right
+            this.pos.x += 5;
+        }
+        
+        super.tick();
     }
 }

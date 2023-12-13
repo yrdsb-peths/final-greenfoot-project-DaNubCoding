@@ -18,6 +18,10 @@ public abstract class Sprite<T extends Scene> extends Actor {
         super.setImage(image);
         this.image = this.getImage();
     }
+    
+    public void setLocation(Vector location) {
+        super.setLocation((int) location.x, (int) location.y);
+    }
 
     public abstract void tick();
 }

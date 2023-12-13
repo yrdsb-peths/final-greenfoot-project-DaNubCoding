@@ -1,10 +1,12 @@
 import greenfoot.*;
 
 public class MainGame extends Scene {
+    public Player player;
+    public Camera camera;
+    
     public MainGame() {
         super();
-        for (int i = 0; i < 50; i++) {
-            new Player(this);
-        }
+        this.player = new Player(this);
+        this.camera = new Camera(this);
     }
 }

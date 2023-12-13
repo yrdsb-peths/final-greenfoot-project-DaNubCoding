@@ -12,8 +12,9 @@ public class Sprack extends Sprite<MainGame> {
     protected static boolean initialized = false;
     
     protected int angle;
+    protected Vector pos;
     
-    public static GreenfootImage[] parseSpritesheet(String path, int numOfLayers) {
+    private static GreenfootImage[] parseSpritesheet(String path, int numOfLayers) {
         GreenfootImage[] layerImages = new GreenfootImage[numOfLayers];
         GreenfootImage spritesheet = new GreenfootImage(path);
         int sheetWidth = spritesheet.getWidth(), sheetHeight = spritesheet.getHeight();
@@ -29,7 +30,7 @@ public class Sprack extends Sprite<MainGame> {
         return layerImages;
     }
     
-    public static void cacheRotations() {
+    private static void cacheRotations() {
         for (int angle = 0; angle < 360; angle++) {
             GreenfootImage image = rotationImages[angle] = new GreenfootImage(fullWidth, fullHeight);
             for (int i = 0; i < layers.length; i++) {
@@ -56,8 +57,8 @@ public class Sprack extends Sprite<MainGame> {
     
     public Sprack(MainGame scene, int x, int y, GreenfootImage[] layerImages) {
         super(scene, x, y);
+        this.pos = new Vector(x, y);
         this.layerImages = layerImages;
-        
         
         this.w = this.layerImages[0].getWidth();
         this.h = this.layerImages[0].getHeight();
@@ -75,6 +76,7 @@ public class Sprack extends Sprite<MainGame> {
     
     public Sprack(MainGame scene, int x, int y, String path, int numOfLayers) {
         super(scene, x, y);
+        this.pos = new Vector(x, y);
         this.layerImages = this.parseSpritesheet(path, numOfLayers);
         
         this.w = this.layerImages[0].getWidth();
@@ -100,5 +102,11 @@ public class Sprack extends Sprite<MainGame> {
         this.setImage(this.rotationImages[this.angle]);
     }
     
-    public void tick() {}
+    public Vector getPos() {
+        return this.pos;
+    }
+    
+    public void tick() {
+        this.setLocation(this.pos.minus(this.scene.camera.getPos()));
+    }
 }
