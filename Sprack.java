@@ -11,26 +11,6 @@ public class Sprack extends Sprite<MainGame> {
     protected static int diagonal;
     protected static boolean initialized = false;
     
-    public static int getWidth() {
-        return w;
-    }
-    
-    public static int getHeight() {
-        return h;
-    }
-    
-    public int getFullWidth() {
-        return fullWidth;
-    }
-    
-    public int getFullHeight() {
-        return fullHeight;
-    }
-    
-    public int getDiagonal() {
-        return diagonal;
-    }
-    
     protected int angle;
     
     public static GreenfootImage[] parseSpritesheet(String path, int numOfLayers) {
@@ -120,7 +100,5 @@ public class Sprack extends Sprite<MainGame> {
         this.setImage(this.rotationImages[this.angle]);
     }
     
-    public void tick() {
-        
-    }
+    public void tick() {}
 }
