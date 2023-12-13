@@ -22,7 +22,7 @@ public class Camera extends Sprite<MainGame> {
     }
     
     public void tick() {
-        Vector offset = this.player.getPos().minus(this.pos);//.minus(new Vector(this.scene.w / 2, this.scene.h / 2));
+        Vector offset = this.player.getPos().minus(this.pos);
         this.pos = this.pos.plus(offset.times(0.1));
         
         double angleOffset = this.player.getAngle() - this.angle;

@@ -112,7 +112,7 @@ public class Sprack extends Sprite<MainGame> {
     public void tick() {
         this.setImage(this.getRotationImage(this.angle - this.scene.camera.getAngle()));
         Vector screenPos = this.pos.minus(this.scene.camera.getPos());
-        screenPos = screenPos.rotate((int) this.scene.camera.getAngle());
+        screenPos = screenPos.rotate((int) -this.scene.camera.getAngle());
         screenPos = screenPos.plus(new Vector(this.scene.w / 2, this.scene.h / 2));
         this.setLocation(screenPos);
     }

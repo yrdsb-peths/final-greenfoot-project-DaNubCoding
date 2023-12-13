@@ -7,16 +7,16 @@ public class Player extends Sprack {
     
     public void tick() {
         if (Greenfoot.isKeyDown("w")) { // up
-            this.pos.y -= 5;
+            this.pos = this.pos.plus(new Vector(0, -5).rotate(this.angle));
         }
         if (Greenfoot.isKeyDown("s")) { // down
-            this.pos.y += 5;
+            this.pos = this.pos.plus(new Vector(0, 5).rotate(this.angle));
         }
         if (Greenfoot.isKeyDown("a")) { // left
-            this.pos.x -= 5;
+            this.pos = this.pos.plus(new Vector(-5, 0).rotate(this.angle));
         }
         if (Greenfoot.isKeyDown("d")) { // right
-            this.pos.x += 5;
+            this.pos = this.pos.plus(new Vector(5, 0).rotate(this.angle));
         }
         
         if (Greenfoot.isKeyDown("q")) { // CCW
