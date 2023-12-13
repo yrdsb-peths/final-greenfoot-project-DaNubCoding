@@ -9,7 +9,6 @@ public class SprackGroup {
     private int w;
     private int h;
     private int diagonal;
-    private boolean initialized = false;
     
     public SprackGroup(String path, int numOfLayers) {
         this.layerImages = this.parseSpritesheet(path, numOfLayers);
@@ -49,7 +48,6 @@ public class SprackGroup {
                 image.drawImage(layers[i].getImage(), layers[i].getX(), layers[i].getY());
             }
         }
-        initialized = true;
     }
     
     private void createLayers() {
