@@ -6,6 +6,6 @@ public class Player extends Sprack {
     }
     
     public void tick() {
-        this.angle++;
+        this.setAngle(this.angle + 1);
     }
 }

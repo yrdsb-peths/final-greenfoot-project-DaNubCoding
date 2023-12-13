@@ -1,8 +1,36 @@
 import greenfoot.*;
 
 public class Sprack extends Sprite<MainGame> {
-    protected SprackLayer[] layers;
-    protected GreenfootImage[] layerImages;
+    protected static GreenfootImage[] rotationImages = new GreenfootImage[360];
+    protected static int fullWidth;
+    protected static int fullHeight;
+    protected static SprackLayer[] layers;
+    protected static GreenfootImage[] layerImages;
+    protected static int w;
+    protected static int h;
+    protected static int diagonal;
+    protected static boolean initialized = false;
+    
+    public static int getWidth() {
+        return w;
+    }
+    
+    public static int getHeight() {
+        return h;
+    }
+    
+    public int getFullWidth() {
+        return fullWidth;
+    }
+    
+    public int getFullHeight() {
+        return fullHeight;
+    }
+    
+    public int getDiagonal() {
+        return diagonal;
+    }
+    
     protected int angle;
     
     public static GreenfootImage[] parseSpritesheet(String path, int numOfLayers) {
@@ -21,37 +49,75 @@ public class Sprack extends Sprite<MainGame> {
         return layerImages;
     }
     
-    public Sprack(MainGame scene, int x, int y, GreenfootImage[] layerImages) {
-        super(scene, x, y);
-        this.layers = new SprackLayer[layerImages.length * Scene.PX];
-        this.setImage((GreenfootImage) null);
-        this.layerImages = layerImages;
-        this.createLayers();
+    public static void cacheRotations() {
+        for (int angle = 0; angle < 360; angle++) {
+            GreenfootImage image = rotationImages[angle] = new GreenfootImage(fullWidth, fullHeight);
+            for (int i = 0; i < layers.length; i++) {
+                layers[i].rotate(angle);
+                image.drawImage(layers[i].getImage(), layers[i].getX(), layers[i].getY());
+            }
+        }
+        initialized = true;
     }
     
-    public Sprack(MainGame scene, int x, int y, String path, int numOfLayers) {
-        super(scene, x, y);
-        this.layers = new SprackLayer[numOfLayers * Scene.PX];
-        this.setImage((GreenfootImage) null);
-        this.layerImages = this.parseSpritesheet(path, numOfLayers);
-        this.createLayers();
-    }
-    
-    private void createLayers() {
-        for (int i = 0; i < this.layerImages.length; i++) {
+    private static void createLayers() {
+        for (int i = 0; i < layerImages.length; i++) {
             for (int j = 0; j < Scene.PX; j++) {
                 int visualLayer = i * Scene.PX + j;
-                this.layers[visualLayer] = new SprackLayer(this.scene, this, visualLayer);
+                GreenfootImage image = getLayerImage(visualLayer);
+                layers[visualLayer] = new SprackLayer(visualLayer, fullHeight, diagonal, image);
             }
         }
     }
     
-    public GreenfootImage getLayerImage(int layer) {
-        return this.layerImages[layer / Scene.PX];
+    public static GreenfootImage getLayerImage(int layer) {
+        return layerImages[layer / Scene.PX];
+    }
+    
+    public Sprack(MainGame scene, int x, int y, GreenfootImage[] layerImages) {
+        super(scene, x, y);
+        this.layerImages = layerImages;
+        
+        
+        this.w = this.layerImages[0].getWidth();
+        this.h = this.layerImages[0].getHeight();
+        this.diagonal = (int) Math.ceil(Math.sqrt(this.w * this.w + this.h * this.h));
+        this.fullWidth = this.diagonal;
+        this.fullHeight = this.layerImages.length * Scene.PX + this.diagonal;
+        
+        if (!this.initialized) {
+            this.layers = new SprackLayer[layerImages.length * Scene.PX];
+            this.createLayers();
+            this.cacheRotations();
+        }
+        this.setImage(this.rotationImages[0]);
+    }
+    
+    public Sprack(MainGame scene, int x, int y, String path, int numOfLayers) {
+        super(scene, x, y);
+        this.layerImages = this.parseSpritesheet(path, numOfLayers);
+        
+        this.w = this.layerImages[0].getWidth();
+        this.h = this.layerImages[0].getHeight();
+        this.diagonal = (int) Math.ceil(Math.sqrt(this.w * this.w + this.h * this.h));
+        this.fullWidth = this.diagonal;
+        this.fullHeight = this.layerImages.length * Scene.PX + this.diagonal;
+        
+        if (!this.initialized) {
+            this.layers = new SprackLayer[numOfLayers * Scene.PX];
+            this.createLayers();
+            this.cacheRotations();
+        }
+        this.setImage(this.rotationImages[0]);
     }
     
     public int getAngle() {
         return this.angle;
+    }
+    
+    protected void setAngle(int angle) {
+        this.angle = angle % 360;
+        this.setImage(this.rotationImages[this.angle]);
     }
     
     public void tick() {
