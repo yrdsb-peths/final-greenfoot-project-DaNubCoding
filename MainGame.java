@@ -28,14 +28,14 @@ public class MainGame extends Scene {
                 new Block(this, blocks, x, 0, z);
             }
         }
-        new Block(this, blocks, 3, -1, 4);
-        new Block(this, blocks, 4, -1, 4);
-        new Block(this, blocks, 5, -1, 4);
-        new Block(this, blocks, 4, -1, 3);
-        new Block(this, blocks, 4, -1, 5);
-        new Block(this, blocks, 4, -2, 4);
+        new Block(this, blocks, 3, 1, 4);
+        new Block(this, blocks, 4, 1, 4);
+        new Block(this, blocks, 5, 1, 4);
+        new Block(this, blocks, 4, 1, 3);
+        new Block(this, blocks, 4, 1, 5);
+        new Block(this, blocks, 4, 2, 4);
         for (int x = 7; x < 10; x++) {
-            for (int y = -1; y > -4; y--) {
+            for (int y = 1; y < 4; y++) {
                 new Block(this, blocks, x, y, 9);
             }
         }
@@ -56,7 +56,7 @@ public class MainGame extends Scene {
                 } else {
                     return 0;
                 }
-            } else if (a.pos.y.get() < b.pos.y.get()) {
+            } else if (a.pos.y.get() > b.pos.y.get()) {
                 return 1;
             } else {
                 return -1;

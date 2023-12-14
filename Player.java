@@ -2,7 +2,7 @@ import greenfoot.*;
 
 public class Player extends Sprack {
     public Player(MainGame scene, SprackGroup group) {
-        super(scene, group, 0, -64, 0);
+        super(scene, group, 0, 64, 0);
     }
     
     public void tick() {
@@ -19,10 +19,10 @@ public class Player extends Sprack {
             this.pos.xz.plus$(new Vector2(5, 0).rotate(this.angle));
         }
         if (Greenfoot.isKeyDown("space")) { // up
-            this.pos.y.minus$(5);
+            this.pos.y.plus$(5);
         }
         if (Greenfoot.isKeyDown("shift")) { // down
-            this.pos.y.plus$(5);
+            this.pos.y.minus$(5);
         }
         
         if (Greenfoot.isKeyDown("left")) { // CCW
