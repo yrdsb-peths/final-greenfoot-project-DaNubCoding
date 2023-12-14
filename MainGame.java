@@ -16,11 +16,17 @@ public class MainGame extends Scene {
         SprackGroup players = new SprackGroup("player.png", 32);
         
         Log.debug("Spawning spracks...");
-        for (int x = 0; x < 8; x++) {
-            for (int z = 0; z < 8; z++) {
+        for (int x = 0; x < 12; x++) {
+            for (int z = 0; z < 12; z++) {
                 new Block(this, blocks, x, 0, z);
             }
         }
+        new Block(this, blocks, 3, -1, 4);
+        new Block(this, blocks, 4, -1, 4);
+        new Block(this, blocks, 5, -1, 4);
+        new Block(this, blocks, 4, -1, 3);
+        new Block(this, blocks, 4, -1, 5);
+        new Block(this, blocks, 4, -2, 4);
         
         this.player = new Player(this, players);
         this.camera = new Camera(this);
