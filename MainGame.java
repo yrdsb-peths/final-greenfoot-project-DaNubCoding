@@ -27,6 +27,11 @@ public class MainGame extends Scene {
         new Block(this, blocks, 4, -1, 3);
         new Block(this, blocks, 4, -1, 5);
         new Block(this, blocks, 4, -2, 4);
+        for (int x = 7; x < 10; x++) {
+            for (int y = -1; y > -4; y--) {
+                new Block(this, blocks, x, y, 9);
+            }
+        }
         
         this.player = new Player(this, players);
         this.camera = new Camera(this);
