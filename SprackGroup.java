@@ -27,6 +27,7 @@ public class SprackGroup {
     private static GreenfootImage[] parseSpritesheet(String path, int numOfLayers) {
         GreenfootImage[] layerImages = new GreenfootImage[numOfLayers];
         GreenfootImage spritesheet = new GreenfootImage(path);
+        spritesheet.mirrorVertically();
         int sheetWidth = spritesheet.getWidth(), sheetHeight = spritesheet.getHeight();
         int layerWidth = sheetWidth, layerHeight = sheetHeight / numOfLayers;
         
