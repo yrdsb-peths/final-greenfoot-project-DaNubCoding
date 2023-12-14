@@ -25,10 +25,10 @@ public class Player extends Sprack {
             this.pos.y.plus$(5);
         }
         
-        if (Greenfoot.isKeyDown("q")) { // CCW
+        if (Greenfoot.isKeyDown("left")) { // CCW
             this.setAngle(this.angle - 2);
         }
-        if (Greenfoot.isKeyDown("e")) { // CW
+        if (Greenfoot.isKeyDown("right")) { // CW
             this.setAngle(this.angle + 2);
         }
         
