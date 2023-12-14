@@ -67,4 +67,8 @@ public class SprackGroup {
     public GreenfootImage getRotationImage(double angle) {
         return this.rotationImages[Math.floorMod((int) angle, 360)];
     }
+    
+    public Vector getCenterOffset() {
+        return new Vector(0, this.fullHeight / 2 - this.diagonal / 2);
+    }
 }
