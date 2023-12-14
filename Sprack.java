@@ -1,6 +1,9 @@
 import greenfoot.*;
+import java.util.*;
 
 public class Sprack extends Sprite<MainGame> {
+    public static ArrayList<Sprack> spracks = new ArrayList<Sprack>();
+    
     protected SprackGroup group;
     protected int angle;
     protected Vector3 pos;
@@ -10,6 +13,8 @@ public class Sprack extends Sprite<MainGame> {
         this.group = group;
         this.pos = new Vector3(x, y, z);
         this.setImage(this.group.getRotationImage(0));
+        
+        this.spracks.add(this);
     }
     
     public int getAngle() {

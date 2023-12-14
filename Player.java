@@ -2,7 +2,7 @@ import greenfoot.*;
 
 public class Player extends Sprack {
     public Player(MainGame scene, SprackGroup group) {
-        super(scene, group, 0, 0, 0);
+        super(scene, group, 0, -64, 0);
     }
     
     public void tick() {

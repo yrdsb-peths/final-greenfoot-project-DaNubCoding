@@ -1,4 +1,5 @@
 import greenfoot.*;
+import java.util.*;
 
 public class MainGame extends Scene {
     public Player player;
@@ -15,12 +16,41 @@ public class MainGame extends Scene {
         SprackGroup players = new SprackGroup("player.png", 32);
         
         Log.debug("Spawning spracks...");
-        new Block(this, blocks, 0, 0, 0);
-        new Block(this, blocks, 64, 0, 0);
+        for (int x = 0; x < 8; x++) {
+            for (int z = 0; z < 8; z++) {
+                new Block(this, blocks, x, 0, z);
+            }
+        }
         
         this.player = new Player(this, players);
         this.camera = new Camera(this);
         
         Log.debug("Complete");
+    }
+    
+    private class zSortComparator implements Comparator<Sprack> {
+        public int compare(Sprack a, Sprack b) {
+            if (a.pos.y.get() == b.pos.y.get()) {
+                if (a.getY() < b.getY()) {
+                    return -1;
+                } else if (a.getY() > b.getY()) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            } else if (a.pos.y.get() < b.pos.y.get()) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+    }
+    
+    public void act() {
+        Collections.sort(Sprack.spracks, new zSortComparator());
+        for (int i = 0; i < Sprack.spracks.size(); i++) {
+            Sprack.spracks.get(i).remove();
+            Sprack.spracks.get(i).add();
+        }
     }
 }

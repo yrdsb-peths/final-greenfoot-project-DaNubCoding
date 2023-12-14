@@ -22,6 +22,14 @@ public abstract class Sprite<T extends Scene> extends Actor {
     public void setLocation(Vector2 location) {
         super.setLocation((int) location.x.get(), (int) location.y.get());
     }
+    
+    public void remove() {
+        this.scene.removeObject(this);
+    }
+    
+    public void add() {
+        this.scene.addObject(this, 0, 0);
+    }
 
     public abstract void tick();
 }
