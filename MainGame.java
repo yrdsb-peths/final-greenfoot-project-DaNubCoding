@@ -15,8 +15,8 @@ public class MainGame extends Scene {
         SprackGroup players = new SprackGroup("player.png", 32);
         
         Log.debug("Spawning spracks...");
-        new Block(this, blocks, 0, 0);
-        new Block(this, blocks, 64, 0);
+        new Block(this, blocks, 0, 0, 0);
+        new Block(this, blocks, 64, 0, 0);
         
         this.player = new Player(this, players);
         this.camera = new Camera(this);

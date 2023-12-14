@@ -68,7 +68,7 @@ public class SprackGroup {
         return this.rotationImages[Math.floorMod((int) angle, 360)];
     }
     
-    public Vector getCenterOffset() {
-        return new Vector(0, this.fullHeight / 2 - this.diagonal / 2);
+    public Vector2 getCenterOffset() {
+        return new Vector2(0, this.fullHeight / 2 - this.diagonal / 2);
     }
 }
