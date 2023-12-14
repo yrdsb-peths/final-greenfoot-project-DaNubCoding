@@ -26,7 +26,7 @@ public class Vector3 {
     }
     
     public Vector3 plus(Vector3 other) {
-        return new Vector3(this.x.plus(other.x.get()), this.y.plus(other.y.get()), this.z.plus(other.z.get()));
+        return new Vector3(this.x.plus(other.x), this.y.plus(other.y), this.z.plus(other.z));
     }
     
     public void plus$(Vector3 other) {
@@ -36,7 +36,7 @@ public class Vector3 {
     }
     
     public Vector3 minus(Vector3 other) {
-        return new Vector3(this.x.minus(other.x.get()), this.y.minus(other.y.get()), this.z.minus(other.z.get()));
+        return new Vector3(this.x.minus(other.x), this.y.minus(other.y), this.z.minus(other.z));
     }
     
     public void minus$(Vector3 other) {

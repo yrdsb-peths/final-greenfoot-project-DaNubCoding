@@ -20,16 +20,16 @@ public class Vector2 {
     }
     
     public Vector2 plus(Vector2 other) {
-        return new Vector2(this.x.plus(other.x.get()), this.y.plus(other.x.get()));
+        return new Vector2(this.x.plus(other.x), this.y.plus(other.x));
     }
     
     public void plus$(Vector2 other) {
-        this.x.plus$(other.x.get());
-        this.y.plus$(other.y.get());
+        this.x.plus$(other.x);
+        this.y.plus$(other.y);
     }
     
     public Vector2 minus(Vector2 other) {
-        return new Vector2(this.x.minus(other.x.get()), this.y.minus(other.y.get()));
+        return new Vector2(this.x.minus(other.x), this.y.minus(other.y));
     }
     
     public void minus$(Vector2 other) {

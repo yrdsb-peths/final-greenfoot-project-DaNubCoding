@@ -31,8 +31,8 @@ public class Sprack extends Sprite<MainGame> {
         screenPos.rotate$((int) -this.scene.camera.getAngle());
         screenPos.minus$(this.group.getCenterOffset());
         screenPos.plus$(new Vector2(this.scene.w / 2, this.scene.h / 2));
-        screenPos.y.minus$(this.scene.camera.getPos().y.get());
-        screenPos.y.plus$(this.pos.y.get());
+        screenPos.y.plus$(this.pos.y);
+        screenPos.y.minus$(this.scene.camera.getPos().y);
         this.setLocation(screenPos);
     }
 }

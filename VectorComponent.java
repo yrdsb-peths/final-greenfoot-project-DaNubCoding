@@ -18,24 +18,40 @@ public class VectorComponent {
             return this.x + other;
         }
         
+        public double plus(One other) {
+            return this.x + other.get();
+        }
+        
         public void plus$(double other) {
             this.x += other;
+        }
+        
+        public void plus$(One other) {
+            this.x += other.get();
         }
         
         public double minus(double other) {
             return this.x - other;
         }
         
+        public double minus(One other) {
+            return this.x - other.get();
+        }
+        
         public void minus$(double other) {
             this.x -= other;
         }
         
-        public double times(double other) {
-            return this.x * other;
+        public void minus$(One other) {
+            this.x -= other.get();
         }
         
-        public void times$(double other) {
-            this.x *= other;
+        public double times(double scalar) {
+            return this.x * scalar;
+        }
+        
+        public void times$(double scalar) {
+            this.x *= scalar;
         }
     }
     
