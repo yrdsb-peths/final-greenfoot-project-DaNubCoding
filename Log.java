@@ -14,7 +14,7 @@ public class Log
     public static void start() {
         if (!DEBUG) return;
         Date datetime = new Date();
-        System.out.println("\n" + formatTime() + " Started and debugging");
+        System.out.println("\n" + formatTime() + " Debugging");
     }
     
     public static void debug(String output) {

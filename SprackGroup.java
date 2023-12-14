@@ -9,6 +9,7 @@ public class SprackGroup {
     private int w;
     private int h;
     private int diagonal;
+    private int numOfLayers;
     
     public SprackGroup(String path, int numOfLayers) {
         this.layerImages = this.parseSpritesheet(path, numOfLayers);
@@ -19,7 +20,8 @@ public class SprackGroup {
         this.fullWidth = this.diagonal;
         this.fullHeight = this.layerImages.length * Scene.PX + this.diagonal;
         
-        this.layers = new SprackLayer[numOfLayers * Scene.PX];
+        this.numOfLayers = numOfLayers * Scene.PX;
+        this.layers = new SprackLayer[this.numOfLayers];
         this.createLayers();
         this.cacheRotations();
     }
@@ -71,5 +73,9 @@ public class SprackGroup {
     
     public Vector2 getCenterOffset() {
         return new Vector2(0, this.fullHeight / 2 - this.diagonal / 2);
+    }
+    
+    public int getNumOfLayers() {
+        return this.numOfLayers;
     }
 }

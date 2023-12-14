@@ -2,18 +2,25 @@ import greenfoot.*;
 import java.util.*;
 
 public class MainGame extends Scene {
+    static SprackGroup blocks;
+    static SprackGroup players;
+    
+    static {
+        Log.start();
+        Log.debug("Loading static sprack groups:");
+        Log.debug("Creating sprack group from \"block.png\"...");
+        blocks = new SprackGroup("block.png", 16);
+        Log.debug("Creating sprack group from \"player.png\"...");
+        players = new SprackGroup("player.png", 32);
+    }
+    
     public Player player;
     public Camera camera;
     
     public MainGame() {
         super();
         
-        Log.start();
-        
-        Log.debug("Creating sprack group from \"block.png\"...");
-        SprackGroup blocks = new SprackGroup("block.png", 16);
-        Log.debug("Creating sprack group from \"player.png\"...");
-        SprackGroup players = new SprackGroup("player.png", 32);
+        Log.debug("Starting game...");
         
         Log.debug("Spawning spracks...");
         for (int x = 0; x < 12; x++) {
