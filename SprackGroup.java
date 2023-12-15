@@ -68,7 +68,6 @@ public class SprackGroup {
     }
     
     public GreenfootImage getRotationImage(double horAngle, double verAngle) {
-        Log.debug("" + verAngle);
         int realHorAngle = Math.floorMod((int) horAngle, 360);
         GreenfootImage image = this.rotationImages[realHorAngle];
         if (image == null || this.rotationVerAngles[realHorAngle] != (int) verAngle) {
