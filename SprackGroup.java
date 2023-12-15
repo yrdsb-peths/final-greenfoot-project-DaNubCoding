@@ -4,6 +4,7 @@ public class SprackGroup {
     private String path;
     private int numOfLayers;
     private GreenfootImage[] rotationImages = new GreenfootImage[360];
+    private int[] rotationVerAngles = new int[360];
     private int fullWidth;
     private int fullHeight;
     private SprackLayer[] layers;
@@ -53,12 +54,12 @@ public class SprackGroup {
         return this.layerImages[layer];
     }
     
-    private GreenfootImage generateRotationImage(int angle) {
-        this.rotationImages[angle] = new GreenfootImage(fullWidth, fullHeight);
-        GreenfootImage image = this.rotationImages[angle];
+    private GreenfootImage generateRotationImage(int horAngle, int verAngle) {
+        this.rotationImages[horAngle] = new GreenfootImage(fullWidth, fullHeight);
+        GreenfootImage image = this.rotationImages[horAngle];
         for (int i = 0; i < this.layers.length; i++) {
             SprackLayer layer = this.layers[i];
-            layer.rotate(angle);
+            layer.rotate(horAngle, verAngle);
             for (int j = 0; j < Scene.PX; j++) {
                 image.drawImage(layer.getImage(), layer.getX(), layer.getY() - j);
             }
@@ -66,9 +67,14 @@ public class SprackGroup {
         return image;
     }
     
-    public GreenfootImage getRotationImage(double angle) {
-        GreenfootImage image = this.rotationImages[Math.floorMod((int) angle, 360)];
-        if (image == null) image = this.generateRotationImage(Math.floorMod((int) angle, 360));
+    public GreenfootImage getRotationImage(double horAngle, double verAngle) {
+        Log.debug("" + verAngle);
+        int realHorAngle = Math.floorMod((int) horAngle, 360);
+        GreenfootImage image = this.rotationImages[realHorAngle];
+        if (image == null || this.rotationVerAngles[realHorAngle] != (int) verAngle) {
+            this.rotationVerAngles[realHorAngle] = (int) verAngle;
+            image = this.generateRotationImage(realHorAngle, (int) verAngle);
+        }
         return image;
     }
     

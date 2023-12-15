@@ -5,7 +5,6 @@ public class SprackLayer extends Actor {
     private int x;
     private int y;
     private GreenfootImage originalImage;
-    private int angle = 0;
     
     public SprackLayer(int layer, int fullHeight, int diagonal, GreenfootImage sourceImage) {
         this.layer = layer;
@@ -20,9 +19,10 @@ public class SprackLayer extends Actor {
         this.setImage(this.originalImage);
     }
     
-    public void rotate(int angle) {
+    public void rotate(int horAngle, int verAngle) {
         GreenfootImage newImage = new GreenfootImage(this.originalImage);
-        newImage.rotate(angle);
+        newImage.rotate(horAngle);
+        newImage.scale(newImage.getWidth(), newImage.getHeight() * verAngle / 45);
         this.setImage(newImage);
     }
     
