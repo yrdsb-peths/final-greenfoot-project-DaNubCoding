@@ -49,9 +49,9 @@ public class MainGame extends Scene {
     private class zSortComparator implements Comparator<Sprack> {
         public int compare(Sprack a, Sprack b) {
             if (a.pos.y.get() == b.pos.y.get()) {
-                if (a.getY() < b.getY()) {
+                if (a.getY() + a.group.getCenterOffset().y.get() < b.getY() + b.group.getCenterOffset().y.get()) {
                     return -1;
-                } else if (a.getY() > b.getY()) {
+                } else if (a.getY() + a.group.getCenterOffset().y.get() > b.getY() + b.group.getCenterOffset().y.get()) {
                     return 1;
                 } else {
                     return 0;

@@ -80,4 +80,8 @@ public class SprackGroup {
     public Vector2 getCenterOffset() {
         return new Vector2(0, this.fullHeight / 2 - this.diagonal / 2);
     }
+    
+    public int getNumOfLayers() {
+        return this.layers.length;
+    }
 }
