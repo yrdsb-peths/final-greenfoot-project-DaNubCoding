@@ -25,6 +25,6 @@ public class Log
     
     private static String formatTime() {
         Date date = new Date();
-        return "[" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "]";
+        return "[" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "." + System.currentTimeMillis() % 1000 + "]";
     }
 }
