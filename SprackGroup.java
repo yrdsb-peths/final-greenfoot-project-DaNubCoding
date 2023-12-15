@@ -23,7 +23,6 @@ public class SprackGroup {
         this.numOfLayers = numOfLayers * Scene.PX;
         this.layers = new SprackLayer[this.numOfLayers];
         this.createLayers();
-        this.cacheRotations();
     }
     
     private static GreenfootImage[] parseSpritesheet(String path, int numOfLayers) {
@@ -43,16 +42,6 @@ public class SprackGroup {
         return layerImages;
     }
     
-    private void cacheRotations() {
-        for (int angle = 0; angle < 360; angle++) {
-            GreenfootImage image = rotationImages[angle] = new GreenfootImage(fullWidth, fullHeight);
-            for (int i = 0; i < layers.length; i++) {
-                layers[i].rotate(angle);
-                image.drawImage(layers[i].getImage(), layers[i].getX(), layers[i].getY());
-            }
-        }
-    }
-    
     private void createLayers() {
         for (int i = 0; i < layerImages.length; i++) {
             for (int j = 0; j < Scene.PX; j++) {
@@ -67,8 +56,19 @@ public class SprackGroup {
         return layerImages[layer / Scene.PX];
     }
     
+    private GreenfootImage generateRotationImage(int angle) {
+        GreenfootImage image = rotationImages[angle] = new GreenfootImage(fullWidth, fullHeight);
+        for (int i = 0; i < layers.length; i++) {
+            layers[i].rotate(angle);
+            image.drawImage(layers[i].getImage(), layers[i].getX(), layers[i].getY());
+        }
+        return image;
+    }
+    
     public GreenfootImage getRotationImage(double angle) {
-        return this.rotationImages[Math.floorMod((int) angle, 360)];
+        GreenfootImage image = this.rotationImages[Math.floorMod((int) angle, 360)];
+        if (image == null) image = this.generateRotationImage(Math.floorMod((int) angle, 360));
+        return image;
     }
     
     public Vector2 getCenterOffset() {
