@@ -9,7 +9,6 @@ public class SprackGroup {
     private int w;
     private int h;
     private int diagonal;
-    private int numOfLayers;
     
     public SprackGroup(String path, int numOfLayers) {
         this.layerImages = this.parseSpritesheet(path, numOfLayers);
@@ -20,9 +19,9 @@ public class SprackGroup {
         this.fullWidth = this.diagonal;
         this.fullHeight = this.layerImages.length * Scene.PX + this.diagonal;
         
-        this.numOfLayers = numOfLayers * Scene.PX;
-        this.layers = new SprackLayer[this.numOfLayers];
+        this.layers = new SprackLayer[numOfLayers];
         this.createLayers();
+        this.cacheRotations();
     }
     
     private static GreenfootImage[] parseSpritesheet(String path, int numOfLayers) {
@@ -42,25 +41,30 @@ public class SprackGroup {
         return layerImages;
     }
     
+    private void cacheRotations() {
+        for (int angle = 0; angle < 360; angle++) {
+            generateRotationImage(angle);
+        }
+    }
+    
     private void createLayers() {
-        for (int i = 0; i < layerImages.length; i++) {
-            for (int j = 0; j < Scene.PX; j++) {
-                int visualLayer = i * Scene.PX + j;
-                GreenfootImage image = getLayerImage(visualLayer);
-                layers[visualLayer] = new SprackLayer(visualLayer, fullHeight, diagonal, image);
-            }
+        for (int i = 0; i < layers.length; i++) {
+            GreenfootImage image = getLayerImage(i);
+            layers[i] = new SprackLayer(i * Scene.PX, fullHeight, diagonal, image);
         }
     }
     
     public GreenfootImage getLayerImage(int layer) {
-        return layerImages[layer / Scene.PX];
+        return layerImages[layer];
     }
     
     private GreenfootImage generateRotationImage(int angle) {
         GreenfootImage image = rotationImages[angle] = new GreenfootImage(fullWidth, fullHeight);
         for (int i = 0; i < layers.length; i++) {
             layers[i].rotate(angle);
-            image.drawImage(layers[i].getImage(), layers[i].getX(), layers[i].getY());
+            for (int j = 0; j < Scene.PX; j++) {
+                image.drawImage(layers[i].getImage(), layers[i].getX(), layers[i].getY() - j);
+            }
         }
         return image;
     }
@@ -73,9 +77,5 @@ public class SprackGroup {
     
     public Vector2 getCenterOffset() {
         return new Vector2(0, this.fullHeight / 2 - this.diagonal / 2);
-    }
-    
-    public int getNumOfLayers() {
-        return this.numOfLayers;
     }
 }
