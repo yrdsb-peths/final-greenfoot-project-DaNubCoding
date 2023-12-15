@@ -33,13 +33,13 @@ public class Player extends Sprack {
             this.horAngle += 2;
         }
         if (Greenfoot.isKeyDown("up")) {
-            this.verAngle += 2;
+            this.verAngle += 1;
             if (this.verAngle > 45) {
                 this.verAngle = 45;
             }
         }
         if (Greenfoot.isKeyDown("down")) {
-            this.verAngle -= 2;
+            this.verAngle -= 1;
             if (this.verAngle < 13) {
                 this.verAngle = 13;
             }
