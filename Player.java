@@ -40,8 +40,8 @@ public class Player extends Sprack {
         }
         if (Greenfoot.isKeyDown("down")) {
             this.verAngle -= 2;
-            if (this.verAngle < 20) {
-                this.verAngle = 20;
+            if (this.verAngle < 13) {
+                this.verAngle = 13;
             }
         }
         
