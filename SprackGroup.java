@@ -21,7 +21,6 @@ public class SprackGroup {
         
         this.layers = new SprackLayer[numOfLayers];
         this.createLayers();
-        this.cacheRotations();
     }
     
     private static GreenfootImage[] parseSpritesheet(String path, int numOfLayers) {
@@ -39,12 +38,6 @@ public class SprackGroup {
         }
         
         return layerImages;
-    }
-    
-    private void cacheRotations() {
-        for (int angle = 0; angle < 360; angle++) {
-            generateRotationImage(angle);
-        }
     }
     
     private void createLayers() {
