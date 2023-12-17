@@ -6,7 +6,7 @@ public class Sprack extends Sprite<MainGame> {
     
     protected SprackGroup group;
     protected int horAngle;
-    protected int verAngle = 45;
+    protected int verAngle;
     protected Vector3 pos;
     
     public Sprack(MainGame scene, SprackGroup group, int x, int y, int z) {
