@@ -84,4 +84,12 @@ public class SprackGroup {
     public int getNumOfLayers() {
         return this.layers.length;
     }
+    
+    public int getDiagonal() {
+        return this.diagonal;
+    }
+    
+    public Vector3 getSize() {
+        return new Vector3(this.w, this.getNumOfLayers() * Scene.PX, this.h);
+    }
 }

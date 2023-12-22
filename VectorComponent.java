@@ -50,8 +50,16 @@ public class VectorComponent {
             return this.x * scalar;
         }
         
+        public double times(One other) {
+            return this.x * other.get();
+        }
+        
         public void times$(double scalar) {
             this.x *= scalar;
+        }
+        
+        public void times$(One other) {
+            this.x *= other.get();
         }
     }
     

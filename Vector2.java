@@ -20,7 +20,7 @@ public class Vector2 {
     }
     
     public Vector2 plus(Vector2 other) {
-        return new Vector2(this.x.plus(other.x), this.y.plus(other.x));
+        return new Vector2(this.x.plus(other.x), this.y.plus(other.y));
     }
     
     public void plus$(Vector2 other) {
@@ -54,6 +54,12 @@ public class Vector2 {
     
     public void rotate$(double angle) {
         this.set(this.rotate(angle));
+    }
+    
+    public double distanceTo(Vector2 other) {
+        double dx = this.x.get() - other.x.get();
+        double dy = this.y.get() - other.y.get();
+        return Math.sqrt(dx * dx + dy * dy);
     }
     
     public String toString() {

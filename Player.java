@@ -1,6 +1,6 @@
 import greenfoot.*;
 
-public class Player extends Sprack {
+public class Player extends Entity {
     public Player(MainGame scene, SprackGroup group) {
         super(scene, group, 0, 64, 0);
         this.verAngle = 45;
@@ -24,6 +24,10 @@ public class Player extends Sprack {
         }
         if (Greenfoot.isKeyDown("shift")) { // down
             this.pos.y.minus$(5);
+        }
+        
+        if (this.pos.z.get() > 9 * 64 - 32 - 19.2) {
+            this.pos.z.set(9 * 64 - 32 - 19.2);
         }
         
         if (Greenfoot.isKeyDown("left")) { // CCW

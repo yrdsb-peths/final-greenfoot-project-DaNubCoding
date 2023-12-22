@@ -28,6 +28,8 @@ public class MainGame extends Scene {
                 new Block(this, blocks, x, 0, z);
             }
         }
+        new Block(this, blocks, 8, 1.5, 3);
+        new Block(this, blocks, 9, 1, 3);
         new Block(this, blocks, 3, 1, 4);
         new Block(this, blocks, 4, 1, 4);
         new Block(this, blocks, 5, 1, 4);
@@ -46,26 +48,39 @@ public class MainGame extends Scene {
         Log.debug("Complete");
     }
     
-    private class zSortComparator implements Comparator<Sprack> {
+    private class ZIndexComparator implements Comparator<Sprack> {
+        private Camera camera;
+        
+        public ZIndexComparator(Camera camera) {
+            this.camera = camera;
+        }
+        
+        private double nearness(Sprack sprack, Vector2 rotationVec) {
+            return sprack.pos.x.times(rotationVec.x) + sprack.getBottom() + sprack.pos.z.times(rotationVec.y);
+        }
+        
         public int compare(Sprack a, Sprack b) {
-            if (a.pos.y.get() == b.pos.y.get()) {
-                if (a.getY() + a.group.getCenterOffset().y.get() < b.getY() + b.group.getCenterOffset().y.get()) {
-                    return -1;
-                } else if (a.getY() + a.group.getCenterOffset().y.get() > b.getY() + b.group.getCenterOffset().y.get()) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            } else if (a.pos.y.get() > b.pos.y.get()) {
+            Vector2 rotationVec = new Vector2(0, 1).rotate(this.camera.getHorAngle());
+            double aNearness = this.nearness(a, rotationVec);
+            double bNearness = this.nearness(b, rotationVec);
+            if (aNearness > bNearness) {
                 return 1;
-            } else {
+            } else if (aNearness < bNearness) {
                 return -1;
+            } else {
+                return 0;
             }
         }
     }
     
     public void act() {
-        Collections.sort(Sprack.spracks, new zSortComparator());
+        // try {
+            Collections.sort(Sprack.spracks, new ZIndexComparator(this.camera));
+        // } catch (IllegalArgumentException e) {
+            // i actually dont know how to solve this ;-; god help
+            // the array maintains the order of the previous sort if it enters this block
+        // }
+        
         for (int i = 0; i < Sprack.spracks.size(); i++) {
             Sprack.spracks.get(i).remove();
             Sprack.spracks.get(i).add();

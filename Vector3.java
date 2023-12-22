@@ -19,6 +19,15 @@ public class Vector3 {
         this.xz = new VectorComponent.Two(this.x, this.z);
     }
     
+    public Vector3(Vector3 other) {
+        this.x = new VectorComponent.One(other.x.get());
+        this.y = new VectorComponent.One(other.y.get());
+        this.z = new VectorComponent.One(other.z.get());
+        this.xy = new VectorComponent.Two(this.x, this.y);
+        this.zy = new VectorComponent.Two(this.z, this.y);
+        this.xz = new VectorComponent.Two(this.x, this.z);
+    }
+    
     public void set(Vector3 v) {
         this.x.set(v.x.get());
         this.y.set(v.y.get());
@@ -48,11 +57,22 @@ public class Vector3 {
     public Vector3 times(double scalar) {
         return new Vector3(this.x.times(scalar), this.y.times(scalar), this.z.times(scalar));
     }
+    
+    public Vector3 timesEW(Vector3 other) {
+        return this.plus(new Vector3(this.x.times(other.x), this.y.times(other.y), this.z.times(other.z)));
+    }
         
     public void times$(double scalar) {
         this.x.times$(scalar);
         this.y.times$(scalar);
         this.z.times$(scalar);
+    }
+    
+    public double distanceTo(Vector3 other) {
+        double dx = this.x.get() - other.x.get();
+        double dy = this.y.get() - other.y.get();
+        double dz = this.z.get() - other.z.get();
+        return Math.sqrt(dx * dx + dy * dy + dz * dz);
     }
     
     public String toString() {
