@@ -38,43 +38,6 @@ public class Sprack extends Sprite<MainGame> {
         return this.pos;
     }
     
-    public double getBottom() {
-        return this.pos.y.get();
-    }
-    
-    public double getTop() {
-        return this.pos.y.get() + this.group.getNumOfLayers() * Scene.PX;
-    }
-    
-    // unneeded
-    public Vector2 getRotatedXZ() {
-        Vector2 screenPos = this.pos.xz.minus(this.scene.camera.getPos().xz);
-        screenPos.rotate$((int) -this.scene.camera.getHorAngle());
-        return screenPos;
-    }
-    
-    // unneeded
-    public Vector3[] getTopCorners() {
-        Vector3[] corners = new Vector3[4];
-        Vector3 halfSize = this.group.getSize().times(0.5);
-        corners[0] = this.pos.plus(halfSize.timesEW(new Vector3(1, 1, 1)));
-        corners[1] = this.pos.plus(halfSize.timesEW(new Vector3(-1, 1, -1)));
-        corners[2] = this.pos.plus(halfSize.timesEW(new Vector3(1, 1, -1)));
-        corners[3] = this.pos.plus(halfSize.timesEW(new Vector3(-1, 1, 1)));
-        return corners;
-    }
-    
-    // unneeded
-    public Vector3[] getBottomCorners() {
-        Vector3[] corners = new Vector3[4];
-        Vector3 halfSize = this.group.getSize().times(0.5);
-        corners[0] = this.pos.minus(halfSize.timesEW(new Vector3(1, 1, 1)));
-        corners[1] = this.pos.minus(halfSize.timesEW(new Vector3(-1, 1, -1)));
-        corners[2] = this.pos.minus(halfSize.timesEW(new Vector3(1, 1, -1)));
-        corners[3] = this.pos.minus(halfSize.timesEW(new Vector3(-1, 1, 1)));
-        return corners;
-    }
-    
     public void tick() {
         this.setImage(this.group.getRotationImage(this.horAngle - this.scene.camera.getHorAngle(), this.scene.camera.getVerAngle()));
         
