@@ -2,18 +2,19 @@ import greenfoot.*;
 import java.util.*;
 
 public class MainGame extends Scene {
-    static SprackGroup blocks;
-    static SprackGroup players;
+    public static SprackGroup blockSprackGroup;
+    public static SprackGroup playerSprackGroup;
     
     static {
         Log.start();
         Log.debug("Loading static sprack groups:");
         Log.debug("Creating sprack group from \"block.png\"...");
-        blocks = new SprackGroup("block.png", 16);
+        blockSprackGroup = new SprackGroup("block.png", 16);
         Log.debug("Creating sprack group from \"player.png\"...");
-        players = new SprackGroup("player.png", 32);
+        playerSprackGroup = new SprackGroup("player.png", 16);
     }
     
+    public Player player;
     public Camera camera;
     
     public MainGame() {
@@ -24,41 +25,40 @@ public class MainGame extends Scene {
         Log.debug("Spawning spracks...");
         for (int x = 0; x < 12; x++) {
             for (int z = 0; z < 12; z++) {
-                new Block(this, blocks, x, 0, z);
+                new Block(this, x, 0, z);
             }
         }
-        new Block(this, blocks, 9, 1, 3);
-        new Block(this, blocks, 3, 1, 4);
-        new Block(this, blocks, 4, 1, 4);
-        new Block(this, blocks, 5, 1, 4);
-        new Block(this, blocks, 4, 1, 3);
-        new Block(this, blocks, 4, 1, 5);
-        new Block(this, blocks, 4, 2, 4);
+        new Block(this, 9, 1, 3);
+        new Block(this, 3, 1, 4);
+        new Block(this, 4, 1, 4);
+        new Block(this, 5, 1, 4);
+        new Block(this, 4, 1, 3);
+        new Block(this, 4, 1, 5);
+        new Block(this, 4, 2, 4);
         for (int x = 7; x < 10; x++) {
             for (int y = 1; y < 4; y++) {
-                new Block(this, blocks, x, y, 9);
+                new Block(this, x, y, 9);
             }
         }
         
+        this.player = new Player(this);
         this.camera = new Camera(this);
         
         Log.debug("Complete");
     }
     
     private class ZIndexComparator implements Comparator<Sprack> {
-        private Camera camera;
+        private Vector3 camPos;
         
         public ZIndexComparator(Camera camera) {
-            this.camera = camera;
-        }
-        
-        private double nearness(Sprack sprack, Vector2 rotVec) {
-            return sprack.pos.x.get() * Math.signum(rotVec.x.get()) + sprack.pos.y.get() + sprack.pos.z.get() * Math.signum(rotVec.y.get());
+            this.camPos = new Vector3(0, 10000, 0);
+            this.camPos.xy.rotate$(90 - camera.getVerAngle());
+            this.camPos.xz.rotate$(camera.getHorAngle() - 90);
+            this.camPos.plus$(camera.getPos());
         }
         
         public int compare(Sprack a, Sprack b) {
-            Vector2 rotVec = new Vector2(0, 1).rotate(this.camera.getHorAngle());
-            return Double.compare(this.nearness(a, rotVec), this.nearness(b, rotVec));
+            return -Double.compare(a.pos.distanceTo(this.camPos), b.pos.distanceTo(this.camPos));
         }
     }
     
