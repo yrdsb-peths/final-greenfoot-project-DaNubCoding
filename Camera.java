@@ -50,10 +50,6 @@ public class Camera extends Sprite<MainGame> {
                 this.pos.y.minus$(5);
             }
             
-            if (this.pos.z.get() > 9 * 64 - 32 - 19.2) {
-                this.pos.z.set(9 * 64 - 32 - 19.2);
-            }
-            
             if (Greenfoot.isKeyDown("left")) { // CCW
                 this.horAngle -= 2;
             }
