@@ -31,10 +31,10 @@ public class Camera extends Sprite<MainGame> {
         }
         
         public void tick() {
-            if (Greenfoot.isKeyDown("w")) { // up
+            if (Greenfoot.isKeyDown("w")) { // forward
                 this.pos.xz.plus$(new Vector2(0, -5).rotate(this.horAngle));
             }
-            if (Greenfoot.isKeyDown("s")) { // down
+            if (Greenfoot.isKeyDown("s")) { // backward
                 this.pos.xz.plus$(new Vector2(0, 5).rotate(this.horAngle));
             }
             if (Greenfoot.isKeyDown("a")) { // left
@@ -56,13 +56,13 @@ public class Camera extends Sprite<MainGame> {
             if (Greenfoot.isKeyDown("right")) { // CW
                 this.horAngle += 2;
             }
-            if (Greenfoot.isKeyDown("up")) {
+            if (Greenfoot.isKeyDown("up")) { // Crane up
                 this.verAngle += 1;
                 if (this.verAngle > 45) {
                     this.verAngle = 45;
                 }
             }
-            if (Greenfoot.isKeyDown("down")) {
+            if (Greenfoot.isKeyDown("down")) { // Crane down
                 this.verAngle -= 1;
                 if (this.verAngle < 13) {
                     this.verAngle = 13;

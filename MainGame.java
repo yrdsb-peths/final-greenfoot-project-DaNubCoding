@@ -27,7 +27,6 @@ public class MainGame extends Scene {
                 new Block(this, blocks, x, 0, z);
             }
         }
-        new Block(this, blocks, 8, 1.5, 3);
         new Block(this, blocks, 9, 1, 3);
         new Block(this, blocks, 3, 1, 4);
         new Block(this, blocks, 4, 1, 4);
