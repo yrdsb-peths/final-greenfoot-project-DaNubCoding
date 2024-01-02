@@ -77,8 +77,8 @@ public class SprackGroup {
         return image;
     }
     
-    public Vector2 getCenterOffset() {
-        return new Vector2(0, this.fullHeight / 2 - this.diagonal / 2);
+    public Vector2 getCenterOffset(double verAngle) {
+        return new Vector2(0, this.diagonal / 2 * verAngle / 45 + this.getNumOfLayers() * Scene.PX);
     }
     
     public int getNumOfLayers() {
