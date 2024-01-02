@@ -42,9 +42,9 @@ public class Sprack extends Sprite<MainGame> {
         this.setImage(this.group.getRotationImage(this.horAngle - this.scene.camera.getHorAngle(), this.scene.camera.getVerAngle()));
         
         Vector2 screenPos = this.pos.xz.minus(this.scene.camera.getPos().xz);
-        screenPos.rotate$((int) -this.scene.camera.getHorAngle());
+        screenPos.rotate$(-this.scene.camera.getHorAngle());
         screenPos.y.times$(this.scene.camera.getVerAngle() / 45);
-        screenPos.minus$(this.group.getCenterOffset());
+        screenPos.minus$(this.group.getCenterOffset(this.scene.camera.getVerAngle()));
         screenPos.plus$(new Vector2(this.scene.w / 2, this.scene.h / 2));
         screenPos.y.plus$(30);
         screenPos.y.minus$(this.pos.y);

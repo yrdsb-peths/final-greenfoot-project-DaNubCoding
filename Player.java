@@ -50,5 +50,6 @@ public class Player extends Sprack {
         }
         
         super.tick();
+        this.setLocation(this.getX(), this.getY() - 5 * Scene.PX);
     }
 }
