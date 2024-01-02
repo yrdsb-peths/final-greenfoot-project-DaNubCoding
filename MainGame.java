@@ -14,7 +14,6 @@ public class MainGame extends Scene {
         players = new SprackGroup("player.png", 32);
     }
     
-    public Player player;
     public Camera camera;
     
     public MainGame() {
@@ -42,7 +41,6 @@ public class MainGame extends Scene {
             }
         }
         
-        this.player = new Player(this, players);
         this.camera = new Camera(this);
         
         Log.debug("Complete");
@@ -55,31 +53,18 @@ public class MainGame extends Scene {
             this.camera = camera;
         }
         
-        private double nearness(Sprack sprack, Vector2 rotationVec) {
-            return sprack.pos.x.times(rotationVec.x) + sprack.getBottom() + sprack.pos.z.times(rotationVec.y);
+        private double nearness(Sprack sprack, Vector2 rotVec) {
+            return sprack.pos.x.get() * Math.signum(rotVec.x.get()) + sprack.pos.y.get() + sprack.pos.z.get() * Math.signum(rotVec.y.get());
         }
         
         public int compare(Sprack a, Sprack b) {
-            Vector2 rotationVec = new Vector2(0, 1).rotate(this.camera.getHorAngle());
-            double aNearness = this.nearness(a, rotationVec);
-            double bNearness = this.nearness(b, rotationVec);
-            if (aNearness > bNearness) {
-                return 1;
-            } else if (aNearness < bNearness) {
-                return -1;
-            } else {
-                return 0;
-            }
+            Vector2 rotVec = new Vector2(0, 1).rotate(this.camera.getHorAngle());
+            return Double.compare(this.nearness(a, rotVec), this.nearness(b, rotVec));
         }
     }
     
     public void act() {
-        // try {
-            Collections.sort(Sprack.spracks, new ZIndexComparator(this.camera));
-        // } catch (IllegalArgumentException e) {
-            // i actually dont know how to solve this ;-; god help
-            // the array maintains the order of the previous sort if it enters this block
-        // }
+        Collections.sort(Sprack.spracks, new ZIndexComparator(this.camera));
         
         for (int i = 0; i < Sprack.spracks.size(); i++) {
             Sprack.spracks.get(i).remove();
