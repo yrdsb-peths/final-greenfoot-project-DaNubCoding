@@ -14,6 +14,10 @@ public class VectorComponent {
             this.x = x;
         }
         
+        public void set(One x) {
+            this.x = x.get();
+        }
+        
         public double plus(double other) {
             return this.x + other;
         }

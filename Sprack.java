@@ -8,12 +8,14 @@ public class Sprack extends Sprite<MainGame> {
     protected int horAngle;
     protected int verAngle;
     protected Vector3 pos;
+    protected Hitbox hitbox;
     
     public Sprack(MainGame scene, SprackGroup group, int x, int y, int z) {
         super(scene, x, z);
         this.group = group;
         this.pos = new Vector3(x, y, z);
         this.setImage(this.group.getRotationImage(0, 45));
+        this.hitbox = new Hitbox(this, this.group.getSize());
         
         this.spracks.add(this);
     }
@@ -36,6 +38,10 @@ public class Sprack extends Sprite<MainGame> {
     
     public Vector3 getPos() {
         return this.pos;
+    }
+    
+    public Hitbox getHitbox() {
+        return this.hitbox;
     }
     
     public void tick() {
