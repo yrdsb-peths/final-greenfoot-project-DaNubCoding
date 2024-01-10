@@ -2,12 +2,13 @@ import greenfoot.*;
 
 public class Player extends Sprack {
     private Vector3 vel;
-    private boolean onGround = true;
+    private boolean onGround;
     
     public Player(MainGame scene) {
         super(scene, scene.playerSprackGroup, 0, 64, 0);
         this.vel = new Vector3(0, 0, 0);
         this.verAngle = 45;
+        this.onGround = true;
     }
     
     private void move() {
@@ -82,6 +83,6 @@ public class Player extends Sprack {
         }
         
         super.tick();
-        this.setLocation(this.getX(), this.getY() - 5 * Scene.PX);
+        this.setLocation(this.getX(), this.getY() - 6 * Scene.PX);
     }
 }

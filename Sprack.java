@@ -52,7 +52,7 @@ public class Sprack extends Sprite<MainGame> {
         screenPos.y.times$(this.scene.camera.getVerAngle() / 45);
         screenPos.minus$(this.group.getCenterOffset(this.scene.camera.getVerAngle()));
         screenPos.plus$(new Vector2(this.scene.w / 2, this.scene.h / 2));
-        screenPos.y.plus$(30);
+        screenPos.y.plus$(100);
         screenPos.y.minus$(this.pos.y);
         screenPos.y.plus$(this.scene.camera.getPos().y);
         
