@@ -40,6 +40,10 @@ public class MainGame extends Scene {
                 new Block(this, x, y, 9);
             }
         }
+        new Block(this, 7, 3, 8);
+        new Block(this, 8, 3, 8);
+        new Block(this, 9, 3, 8);
+        new Block(this, 8, 2, 6);
         
         this.player = new Player(this);
         this.camera = new Camera(this);
