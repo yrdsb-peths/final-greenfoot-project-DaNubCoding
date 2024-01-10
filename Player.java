@@ -33,31 +33,37 @@ public class Player extends Sprack {
         }
         
         this.pos.x.plus$(this.vel.x);
-        if (this.colliding()) {
+        Sprack sprack = this.colliding();
+        if (sprack != null) {
             this.pos.x.minus$(this.vel.x);
         }
+        
         this.pos.y.plus$(this.vel.y);
-        if (this.colliding()) {
+        sprack = this.colliding();
+        if (sprack != null) {
             this.pos.y.minus$(this.vel.y);
-            // if (this.vel.y.get() >= 0) {
+            if (this.pos.y.get() > sprack.pos.y.get()) {
                 this.onGround = true;
-            // }
+            }
             this.vel.y.set(0);
         }
+        
         this.pos.z.plus$(this.vel.z);
-        if (this.colliding()) {
+        sprack = this.colliding();
+        if (sprack != null) {
             this.pos.z.minus$(this.vel.z);
         }
     }
     
-    private boolean colliding() {
+    private Sprack colliding() {
         for (int i = 0; i < Sprack.spracks.size(); i++) {
-            if (Sprack.spracks.get(i) == this) continue;
-            if (this.hitbox.overlaps(Sprack.spracks.get(i).getHitbox())) {
-                return true;
+            Sprack sprack = Sprack.spracks.get(i);
+            if (sprack == this) continue;
+            if (this.hitbox.overlaps(sprack.getHitbox())) {
+                return sprack;
             }
         }
-        return false;
+        return null;
     }
     
     public void tick() {
