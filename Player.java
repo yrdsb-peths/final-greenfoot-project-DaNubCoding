@@ -11,6 +11,9 @@ public class Player extends Sprack {
         this.onGround = true;
     }
     
+    /**
+     * Calculate movement of the player
+     */
     private void move() {
         this.vel.xz.set(new Vector2(0, 0));
         this.vel.y.minus$(0.5);
@@ -32,12 +35,14 @@ public class Player extends Sprack {
             this.onGround = false;
         }
         
+        // Check collision on the x-axis
         this.pos.x.plus$(this.vel.x);
         Sprack sprack = this.colliding();
         if (sprack != null) {
             this.pos.x.minus$(this.vel.x);
         }
         
+        // Check collision on the y-axis
         this.pos.y.plus$(this.vel.y);
         sprack = this.colliding();
         if (sprack != null) {
@@ -48,6 +53,7 @@ public class Player extends Sprack {
             this.vel.y.set(0);
         }
         
+        // Check collision on the z-axis
         this.pos.z.plus$(this.vel.z);
         sprack = this.colliding();
         if (sprack != null) {
@@ -55,6 +61,9 @@ public class Player extends Sprack {
         }
     }
     
+    /**
+     * Get the first sprack that the player is currently colliding with
+     */
     private Sprack colliding() {
         for (int i = 0; i < Sprack.spracks.size(); i++) {
             Sprack sprack = Sprack.spracks.get(i);
