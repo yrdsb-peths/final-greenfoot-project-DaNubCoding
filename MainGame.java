@@ -67,7 +67,7 @@ public class MainGame extends Scene {
         for (int i = 0; i < Sprack.spracks.size(); i++) {
             Sprack sprack = Sprack.spracks.get(i);
             if (!sprack.inScene()) {
-                sprack.findScreenPos();
+                sprack.updateScreenPos();
             }
             sprack.remove();
             if (sprack.inViewport()) {

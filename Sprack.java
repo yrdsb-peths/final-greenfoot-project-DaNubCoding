@@ -45,10 +45,12 @@ public class Sprack extends Sprite<MainGame> {
     }
     
     public boolean inViewport() {
-        return this.getX() > 0 && this.getX() < this.scene.w && this.getY() > 0 && this.getY() < this.scene.h;
+        boolean xCond = this.getX() > -this.group.getScreenWidth() / 2 && this.getX() < this.scene.w + this.group.getScreenWidth() / 2;
+        boolean yCond = this.getY() > -this.group.getScreenHeight() / 2 && this.getY() < this.scene.h + this.group.getScreenHeight() / 2;
+        return xCond && yCond;
     }
     
-    public void findScreenPos() {
+    public void updateScreenPos() {
         Vector2 screenPos = this.pos.xz.minus(this.scene.camera.getPos().xz);
         screenPos.rotate$(-this.scene.camera.getHorAngle());
         screenPos.y.times$(this.scene.camera.getVerAngle() / 45);
@@ -64,6 +66,6 @@ public class Sprack extends Sprite<MainGame> {
     public void tick() {
         this.setImage(this.group.getRotationImage(this.horAngle - this.scene.camera.getHorAngle(), this.scene.camera.getVerAngle()));
         
-        this.findScreenPos();
+        this.updateScreenPos();
     }
 }
