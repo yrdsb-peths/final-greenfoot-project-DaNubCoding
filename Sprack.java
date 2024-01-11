@@ -44,18 +44,28 @@ public class Sprack extends Sprite<MainGame> {
         return this.hitbox;
     }
     
-    public void tick() {
-        this.setImage(this.group.getRotationImage(this.horAngle - this.scene.camera.getHorAngle(), this.scene.camera.getVerAngle()));
-        
+    public boolean inViewport() {
+        boolean xCond = this.getX() > -this.group.getScreenWidth() / 2 && this.getX() < this.scene.w + this.group.getScreenWidth() / 2;
+        boolean yCond = this.getY() > -this.group.getScreenHeight() / 2 && this.getY() < this.scene.h + this.group.getScreenHeight() / 2;
+        return xCond && yCond;
+    }
+    
+    public void updateScreenPos() {
         Vector2 screenPos = this.pos.xz.minus(this.scene.camera.getPos().xz);
         screenPos.rotate$(-this.scene.camera.getHorAngle());
         screenPos.y.times$(this.scene.camera.getVerAngle() / 45);
         screenPos.minus$(this.group.getCenterOffset(this.scene.camera.getVerAngle()));
         screenPos.plus$(new Vector2(this.scene.w / 2, this.scene.h / 2));
-        screenPos.y.plus$(30);
+        screenPos.y.plus$(100);
         screenPos.y.minus$(this.pos.y);
         screenPos.y.plus$(this.scene.camera.getPos().y);
         
         this.setLocation(screenPos);
+    }
+    
+    public void tick() {
+        this.setImage(this.group.getRotationImage(this.horAngle - this.scene.camera.getHorAngle(), this.scene.camera.getVerAngle()));
+        
+        this.updateScreenPos();
     }
 }

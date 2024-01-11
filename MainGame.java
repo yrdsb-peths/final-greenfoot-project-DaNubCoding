@@ -2,14 +2,17 @@ import greenfoot.*;
 import java.util.*;
 
 public class MainGame extends Scene {
-    public static SprackGroup blockSprackGroup;
+    public static SprackGroup grassSprackGroup;
+    public static SprackGroup dirtSprackGroup;
     public static SprackGroup playerSprackGroup;
     
     static {
         Log.start();
         Log.debug("Loading static sprack groups:");
-        Log.debug("Creating sprack group from \"block.png\"...");
-        blockSprackGroup = new SprackGroup("block.png", 16);
+        Log.debug("Creating sprack group from \"grass.png\"...");
+        grassSprackGroup = new SprackGroup("grass.png", 16);
+        Log.debug("Creating sprack group from \"dirt.png\"...");
+        dirtSprackGroup = new SprackGroup("dirt.png", 16);
         Log.debug("Creating sprack group from \"player.png\"...");
         playerSprackGroup = new SprackGroup("player.png", 16);
     }
@@ -23,21 +26,17 @@ public class MainGame extends Scene {
         Log.debug("Starting game...");
         
         Log.debug("Spawning spracks...");
-        for (int x = 0; x < 12; x++) {
-            for (int z = 0; z < 12; z++) {
-                new Block(this, x, 0, z);
-            }
-        }
-        new Block(this, 9, 1, 3);
-        new Block(this, 3, 1, 4);
-        new Block(this, 4, 1, 4);
-        new Block(this, 5, 1, 4);
-        new Block(this, 4, 1, 3);
-        new Block(this, 4, 1, 5);
-        new Block(this, 4, 2, 4);
-        for (int x = 7; x < 10; x++) {
-            for (int y = 1; y < 4; y++) {
-                new Block(this, x, y, 9);
+        int size = 100;
+        // for (int x = 0; x < size; x++) {
+            // for (int y = -1; y >= -3; y--) {
+                // for (int z = 0; z < size; z++) {
+                    // new Block(this, dirtSprackGroup, x, y, z);
+                // }
+            // }
+        // }
+        for (int x = 0; x < size; x++) {
+            for (int z = 0; z < size; z++) {
+                new Block(this, grassSprackGroup, x, 0, z);
             }
         }
         
@@ -66,8 +65,14 @@ public class MainGame extends Scene {
         Collections.sort(Sprack.spracks, new ZIndexComparator(this.camera));
         
         for (int i = 0; i < Sprack.spracks.size(); i++) {
-            Sprack.spracks.get(i).remove();
-            Sprack.spracks.get(i).add();
+            Sprack sprack = Sprack.spracks.get(i);
+            if (!sprack.inScene()) {
+                sprack.updateScreenPos();
+            }
+            sprack.remove();
+            if (sprack.inViewport()) {
+                sprack.add();
+            }
         }
     }
 }

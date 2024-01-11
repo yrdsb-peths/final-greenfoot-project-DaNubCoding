@@ -92,4 +92,12 @@ public class SprackGroup {
     public Vector3 getSize() {
         return new Vector3(this.w, this.getNumOfLayers() * Scene.PX, this.h);
     }
+    
+    public int getScreenWidth() {
+        return this.fullWidth;
+    }
+    
+    public int getScreenHeight() {
+        return this.fullHeight;
+    }
 }
