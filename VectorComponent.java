@@ -65,6 +65,10 @@ public class VectorComponent {
         public void times$(One other) {
             this.x *= other.get();
         }
+        
+        public boolean equals(One other) {
+            return this.x == other.get();
+        }
     }
     
     public static class Two extends Vector2 {

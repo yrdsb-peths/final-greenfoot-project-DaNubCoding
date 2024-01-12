@@ -62,6 +62,10 @@ public class Vector2 {
         return Math.sqrt(dx * dx + dy * dy);
     }
     
+    public boolean equals(Vector2 other) {
+        return this.x.equals(other.x) && this.y.equals(other.y);
+    }
+    
     public String toString() {
         return "Vector2(" + this.x.get() + ", " + this.y.get() + ")";
     }

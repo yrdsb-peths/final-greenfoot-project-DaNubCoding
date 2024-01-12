@@ -26,14 +26,14 @@ public class MainGame extends Scene {
         Log.debug("Starting game...");
         
         Log.debug("Spawning spracks...");
-        int size = 100;
-        // for (int x = 0; x < size; x++) {
-            // for (int y = -1; y >= -3; y--) {
-                // for (int z = 0; z < size; z++) {
-                    // new Block(this, dirtSprackGroup, x, y, z);
-                // }
-            // }
-        // }
+        int size = 10;
+        for (int x = 0; x < size; x++) {
+            for (int y = -1; y >= -1; y--) {
+                for (int z = 0; z < size; z++) {
+                    new Block(this, dirtSprackGroup, x, y, z);
+                }
+            }
+        }
         for (int x = 0; x < size; x++) {
             for (int z = 0; z < size; z++) {
                 new Block(this, grassSprackGroup, x, 0, z);

@@ -75,6 +75,19 @@ public class Vector3 {
         return Math.sqrt(dx * dx + dy * dy + dz * dz);
     }
     
+    public boolean equals(Object other) {
+        Vector3 o = (Vector3) other;
+        return this.x.equals(o.x) && this.y.equals(o.y) && this.z.equals(o.z);
+    }
+    
+    public int hashCode() {
+        int hash = 17;
+        hash = 31 * hash + Double.hashCode(this.x.get());
+        hash = 31 * hash + Double.hashCode(this.y.get());
+        hash = 31 * hash + Double.hashCode(this.z.get());
+        return hash;
+    }
+    
     public String toString() {
         return "Vector3(" + this.x.get() + ", " + this.y.get() + ", " + this.z.get() + ")";
     }
