@@ -6,24 +6,18 @@ public class MainGame extends Scene {
     public static SprackGroup dirtSprackGroup;
     public static SprackGroup playerSprackGroup;
     
-    static {
-        Log.start();
-        Log.debug("Loading static sprack groups:");
-        Log.debug("Creating sprack group from \"grass.png\"...");
-        grassSprackGroup = new SprackGroup("grass.png", 16);
-        Log.debug("Creating sprack group from \"dirt.png\"...");
-        dirtSprackGroup = new SprackGroup("dirt.png", 16);
-        Log.debug("Creating sprack group from \"player.png\"...");
-        playerSprackGroup = new SprackGroup("player.png", 16);
-    }
-    
     public Player player;
     public Camera camera;
     
     public MainGame() {
         super();
         
-        Log.debug("Starting game...");
+        Log.start();
+        
+        Log.debug("Loading sprack groups...");
+        grassSprackGroup = new SprackGroup("grass.png", 16);
+        dirtSprackGroup = new SprackGroup("dirt.png", 16);
+        playerSprackGroup = new SprackGroup("player.png", 16);
         
         Log.debug("Spawning spracks...");
         int size = 10;
