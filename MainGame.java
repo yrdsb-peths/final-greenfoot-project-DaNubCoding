@@ -8,6 +8,7 @@ public class MainGame extends Scene {
     
     public Player player;
     public Camera camera;
+    private Block mouseOver;
     
     public MainGame() {
         super();
@@ -66,6 +67,15 @@ public class MainGame extends Scene {
             sprack.remove();
             if (sprack.inViewport()) {
                 sprack.add();
+            }
+        }
+        
+        MouseInfo mouseInfo = Greenfoot.getMouseInfo();
+        if (mouseInfo == null) return;
+        if (mouseInfo.getActor() instanceof Block) {
+            this.mouseOver = (Block) mouseInfo.getActor();
+            if (Greenfoot.mousePressed(null)) {
+                this.mouseOver.delete();
             }
         }
     }

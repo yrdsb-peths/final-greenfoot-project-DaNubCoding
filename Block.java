@@ -16,6 +16,11 @@ public class Block extends Sprack {
         this.blocks.put(this.coord, this);
     }
     
+    public void delete() {
+        super.delete();
+        this.blocks.remove(this.coord);
+    }
+    
     public void tick() {
         super.tick();
     }

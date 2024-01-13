@@ -17,7 +17,7 @@ public class Sprack extends Sprite<MainGame> {
         this.setImage(this.group.getRotationImage(0, 45));
         this.hitbox = new Hitbox(this, this.group.getSize());
         
-        this.spracks.add(this);
+        spracks.add(this);
     }
     
     public int getHorAngle() {
@@ -61,6 +61,11 @@ public class Sprack extends Sprite<MainGame> {
         screenPos.y.plus$(this.scene.camera.getPos().y);
         
         this.setLocation(screenPos);
+    }
+    
+    public void delete() {
+        super.remove();
+        spracks.remove(this);
     }
     
     public void tick() {
