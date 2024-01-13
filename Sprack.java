@@ -2,7 +2,7 @@ import greenfoot.*;
 import java.util.*;
 
 public class Sprack extends Sprite<MainGame> {
-    public static ArrayList<Sprack> spracks = new ArrayList<Sprack>();
+    public static ArrayList<Sprack> spracks;
     
     protected SprackGroup group;
     protected int horAngle;

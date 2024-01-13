@@ -51,6 +51,7 @@ public class Player extends Sprack {
                 this.onGround = true;
             }
             this.vel.y.set(0);
+            Log.debug("hi");
         }
         
         // Check collision on the z-axis
