@@ -15,6 +15,9 @@ public class MainGame extends Scene {
         
         Log.start();
         
+        Sprack.spracks = new ArrayList<Sprack>();
+        Block.blocks = new HashMap<Vector3, Block>();
+        
         Log.debug("Loading sprack groups...");
         grassSprackGroup = new SprackGroup("grass.png", 16);
         dirtSprackGroup = new SprackGroup("dirt.png", 16);
@@ -70,6 +73,7 @@ public class MainGame extends Scene {
             }
         }
         
+        // NOTE: use this.getObjectsAt()
         MouseInfo mouseInfo = Greenfoot.getMouseInfo();
         if (mouseInfo == null) return;
         if (mouseInfo.getActor() instanceof Block) {

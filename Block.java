@@ -2,7 +2,7 @@ import greenfoot.*;
 import java.util.HashMap;
 
 public class Block extends Sprack {
-    private static HashMap<Vector3, Block> blocks = new HashMap<Vector3, Block>();
+    public static HashMap<Vector3, Block> blocks;
     
     private Vector3 coord;
     
