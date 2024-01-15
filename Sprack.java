@@ -1,6 +1,10 @@
 import greenfoot.*;
 import java.util.*;
 
+/**
+ * Super class for all the 3D-looking sprites, using sprite-stacking.
+ * "Sprack" is short for "Sprite Stack".
+ */
 public class Sprack extends Sprite<MainGame> {
     public static ArrayList<Sprack> spracks;
     
@@ -10,6 +14,13 @@ public class Sprack extends Sprite<MainGame> {
     protected Vector3 pos;
     protected Hitbox hitbox;
     
+    /**
+     * @param scene The scene that contains the sprack.
+     * @param group The type of sprack
+     * @param x The x coordinates in pixels
+     * @param y The y coordinates in pixels
+     * @param z The z coordinates in pixels
+     */
     public Sprack(MainGame scene, SprackGroup group, int x, int y, int z) {
         super(scene, x, z);
         this.group = group;
@@ -20,36 +31,46 @@ public class Sprack extends Sprite<MainGame> {
         spracks.add(this);
     }
     
+    /**
+     * Get the horizontal rotation of the sprack
+     */
     public int getHorAngle() {
         return this.horAngle;
     }
     
-    protected void setHorAngle(int angle) {
-        this.horAngle = angle;
-    }
-    
+    /**
+     * Get the vertical rotation of the sprack
+     */
     public int getVerAngle() {
         return this.verAngle;
     }
     
-    protected void setVerAngle(int angle) {
-        this.verAngle = angle;
-    }
-    
+    /**
+     * Get the position of the sprack
+     */
     public Vector3 getPos() {
         return this.pos;
     }
     
+    /**
+     * Get the hitbox object of the sprack
+     */
     public Hitbox getHitbox() {
         return this.hitbox;
     }
     
+    /**
+     * Check if the sprack is fully within the viewport
+     */
     public boolean inViewport() {
-        boolean xCond = this.getX() > -this.group.getScreenWidth() / 2 && this.getX() < this.scene.w + this.group.getScreenWidth() / 2;
-        boolean yCond = this.getY() > -this.group.getScreenHeight() / 2 && this.getY() < this.scene.h + this.group.getScreenHeight() / 2;
+        boolean xCond = this.getX() > -this.group.getFullWidth() / 2 && this.getX() < this.scene.w + this.group.getFullWidth() / 2;
+        boolean yCond = this.getY() > -this.group.getFullHeight() / 2 && this.getY() < this.scene.h + this.group.getFullHeight() / 2;
         return xCond && yCond;
     }
     
+    /**
+     * Update the location the sprack should appear on the screen
+     */
     public void updateScreenPos() {
         Vector2 screenPos = this.pos.xz.minus(this.scene.camera.getPos().xz);
         screenPos.rotate$(-this.scene.camera.getHorAngle());
@@ -63,6 +84,9 @@ public class Sprack extends Sprite<MainGame> {
         this.setLocation(screenPos);
     }
     
+    /**
+     * Fully remove the sprack
+     */
     public void delete() {
         super.remove();
         spracks.remove(this);
