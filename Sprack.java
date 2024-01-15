@@ -15,7 +15,7 @@ public class Sprack extends Sprite<MainGame> {
     protected Hitbox hitbox;
     
     /**
-     * @param scene The scene that contains the sprack.
+     * @param scene The MainGame scene that contains the sprack.
      * @param group The type of sprack
      * @param x The x coordinates in pixels
      * @param y The y coordinates in pixels
