@@ -19,17 +19,17 @@ public class MainGame extends Scene {
     public MainGame() {
         super();
         
-        Log.start();
+        Debug.start();
         
         Sprack.spracks = new ArrayList<Sprack>();
         Block.blocks = new HashMap<Vector3, Block>();
         
-        Log.debug("Loading sprack groups...");
+        Debug.log("Loading sprack groups...");
         grassSprackGroup = new SprackGroup("grass.png", 16);
         dirtSprackGroup = new SprackGroup("dirt.png", 16);
         playerSprackGroup = new SprackGroup("player.png", 16);
         
-        Log.debug("Spawning spracks...");
+        Debug.log("Spawning spracks...");
         int size = 10;
         for (int x = 0; x < size; x++) {
             for (int y = -1; y >= -1; y--) {
@@ -47,7 +47,7 @@ public class MainGame extends Scene {
         this.player = new Player(this);
         this.camera = new Camera(this);
         
-        Log.debug("Complete");
+        Debug.log("Complete");
     }
     
     /**

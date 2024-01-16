@@ -1,7 +1,7 @@
 import java.io.File;
 import java.util.Date;
 
-public class Log  
+public class Debug  
 {
     private static boolean DEBUG;
     
@@ -17,7 +17,7 @@ public class Log
         System.out.println("\n" + formatTime() + " Debugging");
     }
     
-    public static void debug(String output) {
+    public static void log(String output) {
         if (!DEBUG) return;
         Date datetime = new Date();
         System.out.println(formatTime() + " " + output);
