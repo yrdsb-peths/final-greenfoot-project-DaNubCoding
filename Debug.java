@@ -1,6 +1,9 @@
 import java.io.File;
 import java.util.Date;
 
+/**
+ * Convenience class for logging information with a datetime prefix.
+ */
 public class Debug  
 {
     private static boolean DEBUG;
@@ -11,12 +14,18 @@ public class Debug
         DEBUG = f.exists();
     }
     
+    /**
+     * Indicate whether the program is in debug mode in the console.
+     */
     public static void start() {
         if (!DEBUG) return;
         Date datetime = new Date();
         System.out.println("\n" + formatTime() + " Debugging");
     }
     
+    /**
+     * Log a string in the console.
+     */
     public static void log(String output) {
         if (!DEBUG) return;
         Date datetime = new Date();
