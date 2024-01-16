@@ -24,9 +24,9 @@ public class Debug
     }
     
     /**
-     * Log a string in the console.
+     * Log anything in the console.
      */
-    public static void log(String output) {
+    public static void log(Object output) {
         if (!DEBUG) return;
         Date datetime = new Date();
         System.out.println(formatTime() + " " + output);
