@@ -93,7 +93,7 @@ public class MainGame extends Scene {
         if (mouseInfo == null) return;
         if (mouseInfo.getActor() instanceof Block) {
             this.mouseOver = (Block) mouseInfo.getActor();
-            if (Greenfoot.mousePressed(null)) {
+            if (Greenfoot.mousePressed(null) && mouseInfo.getButton() == 1) {
                 this.mouseOver.delete();
             }
         }
