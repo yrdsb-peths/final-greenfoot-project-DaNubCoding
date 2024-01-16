@@ -1,6 +1,9 @@
 import greenfoot.*;
 import java.util.*;
 
+/**
+ * Class that contains global logic and spawns sprites for the main game.
+ */
 public class MainGame extends Scene {
     public static SprackGroup grassSprackGroup;
     public static SprackGroup dirtSprackGroup;
@@ -10,6 +13,9 @@ public class MainGame extends Scene {
     public Camera camera;
     private Block mouseOver;
     
+    /**
+     * Intializes the sprites in the main game.
+     */
     public MainGame() {
         super();
         
@@ -44,9 +50,15 @@ public class MainGame extends Scene {
         Log.debug("Complete");
     }
     
+    /**
+     * Comparator class used to sorting the sprites' z-index.
+     */
     private class ZIndexComparator implements Comparator<Sprack> {
         private Vector3 camPos;
         
+        /**
+         * @param The camera object of the game
+         */
         public ZIndexComparator(Camera camera) {
             this.camPos = new Vector3(0, 10000, 0);
             this.camPos.xy.rotate$(90 - camera.getVerAngle());
@@ -54,6 +66,9 @@ public class MainGame extends Scene {
             this.camPos.plus$(camera.getPos());
         }
         
+        /**
+         * Compares two Spracks by their distance to the position of the camera.
+         */
         public int compare(Sprack a, Sprack b) {
             return -Double.compare(a.pos.distanceTo(this.camPos), b.pos.distanceTo(this.camPos));
         }
