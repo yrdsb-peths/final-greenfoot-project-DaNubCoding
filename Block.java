@@ -32,6 +32,28 @@ public class Block extends Sprack {
         this.blocks.put(this.coord, this);
     }
     
+    public Block(MainGame scene, SprackGroup group, Vector3 coord) {
+        this(scene, group, (int) coord.x.get(), (int) coord.y.get(), (int) coord.z.get());
+    }
+    
+    /**
+     * Get the face of the block at an on-screen location.
+     * 
+     * @param x The x location
+     * @param y The y location
+     * @return The face of the block represented as a unit Vector3 pointing in that direction
+     */
+    public Vector3 getFace(int x, int y) {
+        return new Vector3(0, 1, 0);
+    }
+    
+    /**
+     * Get the coordinates of the block as a Vector3.
+     */
+    public Vector3 getCoord() {
+        return this.coord;
+    }
+    
     /**
      * Fully remove a block
      */

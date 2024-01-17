@@ -60,6 +60,7 @@ public class MainGame extends Scene {
          * @param The camera object of the game
          */
         public ZIndexComparator(Camera camera) {
+            // Calculate the position of the camera
             this.camPos = new Vector3(0, 10000, 0);
             this.camPos.xy.rotate$(90 - camera.getVerAngle());
             this.camPos.xz.rotate$(camera.getHorAngle() - 90);
@@ -74,9 +75,45 @@ public class MainGame extends Scene {
         }
     }
     
-    public void act() {
+    private void handleMouse() {
+        MouseInfo mouseInfo = Greenfoot.getMouseInfo();
+        if (mouseInfo == null) return;
+        
+        this.handleBreakBlock(mouseInfo);
+        this.handlePlaceBlock(mouseInfo);
+    }
+    
+    private void handleBreakBlock(MouseInfo mouseInfo) {
+        if (Greenfoot.mousePressed(null) && mouseInfo.getButton() == 1) {
+            List<Block> blocks = this.getObjectsAt(mouseInfo.getX(), mouseInfo.getY(), Block.class);
+            if (blocks.isEmpty()) return;
+            // Break the closest block under the cursor
+            Collections.max(blocks, new ZIndexComparator(this.camera)).delete();
+        }
+    }
+    
+    private void handlePlaceBlock(MouseInfo mouseInfo) {
+        if (Greenfoot.mousePressed(null) && mouseInfo.getButton() == 3) {
+            List<Block> blocks = this.getObjectsAt(mouseInfo.getX(), mouseInfo.getY(), Block.class);
+            if (blocks.isEmpty()) return;
+            Collections.sort(blocks, new ZIndexComparator(this.camera));
+            // Iterate from closest to furthest
+            for (int i = blocks.size() - 1; i >= 0; i--) {
+                Block block = blocks.get(i);
+                Vector3 offset = block.getFace(mouseInfo.getX(), mouseInfo.getY());
+                Vector3 coord = block.getCoord().plus(offset);
+                // If there is already a block there
+                if (Block.getBlock(coord) != null) return;
+                new Block(this, dirtSprackGroup, coord);
+            }
+        }
+    }
+    
+    private void sortSpracks() {
+        // Sort the z-index of the spracks
         Collections.sort(Sprack.spracks, new ZIndexComparator(this.camera));
         
+        // Display the visible spracks, and add them in the order they should be rendered
         for (int i = 0; i < Sprack.spracks.size(); i++) {
             Sprack sprack = Sprack.spracks.get(i);
             if (!sprack.inScene()) {
@@ -87,15 +124,10 @@ public class MainGame extends Scene {
                 sprack.add();
             }
         }
-        
-        // NOTE: use this.getObjectsAt()
-        MouseInfo mouseInfo = Greenfoot.getMouseInfo();
-        if (mouseInfo == null) return;
-        if (mouseInfo.getActor() instanceof Block) {
-            this.mouseOver = (Block) mouseInfo.getActor();
-            if (Greenfoot.mousePressed(null) && mouseInfo.getButton() == 1) {
-                this.mouseOver.delete();
-            }
-        }
+    }
+    
+    public void act() {
+        this.handleMouse();
+        this.sortSpracks();        
     }
 }
