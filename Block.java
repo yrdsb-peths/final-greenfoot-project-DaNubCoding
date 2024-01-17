@@ -22,9 +22,9 @@ public class Block extends Sprack {
     /**
      * @param scene The MainGame scene that contains the block
      * @param group The group that the block will use to render itself
-     * @param x The x coordinates in blocks
-     * @param y The y coordinates in blocks
-     * @param z The z coordinates in blocks
+     * @param x The x coordinate as an int
+     * @param y The y coordinate as an int
+     * @param z The z coordinate as an int
      */
     public Block(MainGame scene, SprackGroup group, int x, int y, int z) {
         super(scene, group, x * 16 * scene.PX, y * 16 * scene.PX, z * 16 * scene.PX);
@@ -32,6 +32,11 @@ public class Block extends Sprack {
         this.blocks.put(this.coord, this);
     }
     
+    /**
+     * @param scene The MainGame scene that contains the block
+     * @param group The group that the block will use to render itself
+     * @param coord The coordinates of the block as a Vector3
+     */
     public Block(MainGame scene, SprackGroup group, Vector3 coord) {
         this(scene, group, (int) coord.x.get(), (int) coord.y.get(), (int) coord.z.get());
     }
@@ -44,7 +49,13 @@ public class Block extends Sprack {
      * @return The face of the block represented as a unit Vector3 pointing in that direction
      */
     public Vector3 getFace(int x, int y) {
-        return new Vector3(0, 1, 0);
+        // Screen X and screen Y (center of the bottom layer)
+        Vector2 centerOffset = this.group.getCenterOffset(this.scene.camera.getVerAngle());
+        int sx = this.getX() - this.group.getFullWidth() + (int) centerOffset.x.get();
+        int sy = this.getY() - this.group.getFullHeight() + (int) centerOffset.y.get();
+        
+        // boolean cond1 = y > ;
+        return new Vector3(0, 0, 0);
     }
     
     /**

@@ -97,14 +97,22 @@ public class MainGame extends Scene {
             List<Block> blocks = this.getObjectsAt(mouseInfo.getX(), mouseInfo.getY(), Block.class);
             if (blocks.isEmpty()) return;
             Collections.sort(blocks, new ZIndexComparator(this.camera));
+            
             // Iterate from closest to furthest
             for (int i = blocks.size() - 1; i >= 0; i--) {
                 Block block = blocks.get(i);
                 Vector3 offset = block.getFace(mouseInfo.getX(), mouseInfo.getY());
+                
+                // If none of the faces have been clicked
+                if (offset == null) continue;
+                
                 Vector3 coord = block.getCoord().plus(offset);
+                
                 // If there is already a block there
                 if (Block.getBlock(coord) != null) return;
+                
                 new Block(this, dirtSprackGroup, coord);
+                break;
             }
         }
     }
