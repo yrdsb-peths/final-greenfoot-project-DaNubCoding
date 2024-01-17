@@ -84,7 +84,7 @@ public abstract class Sprite<T extends Scene> extends Actor {
      * Add the object to its scene
      */
     public void add() {
-        this.scene.addObject(this, 0, 0);
+        this.scene.addObject(this, this.x, this.y);
     }
     
     /**

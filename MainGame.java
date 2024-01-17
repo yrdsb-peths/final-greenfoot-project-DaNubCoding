@@ -11,6 +11,7 @@ public class MainGame extends Scene {
     
     public Player player;
     public Camera camera;
+    public Controls controls;
     private Block mouseOver;
     
     /**
@@ -46,6 +47,7 @@ public class MainGame extends Scene {
         
         this.player = new Player(this);
         this.camera = new Camera(this);
+        this.controls = new Controls(this);
         
         Debug.log("Complete");
     }
@@ -136,6 +138,10 @@ public class MainGame extends Scene {
     
     public void act() {
         this.handleMouse();
-        this.sortSpracks();        
+        this.sortSpracks();
+        
+        if ("/".equals(Greenfoot.getKey())) {
+            this.controls.toggle();
+        }
     }
 }
