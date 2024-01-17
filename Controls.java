@@ -13,6 +13,9 @@ public class Controls extends Sprite<MainGame>
         this.image.setTransparency(200);
     }
     
+    /**
+     * Toggle the visibility of the controls menu.
+     */
     public void toggle() {
         this.visible = !this.visible;
         if (this.visible) {
@@ -20,10 +23,6 @@ public class Controls extends Sprite<MainGame>
         } else {
             this.remove();
         }
-    }
-    
-    public boolean isVisible() {
-        return this.visible;
     }
     
     public void tick() {
