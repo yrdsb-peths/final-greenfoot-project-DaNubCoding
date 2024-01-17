@@ -6,6 +6,11 @@ import java.util.HashMap;
  */
 public class Block extends Sprack {
     public static HashMap<Vector3, Block> blocks;
+    private static GreenfootSound[] breakSounds = {
+        new GreenfootSound("sounds/dirt1.wav"),
+        new GreenfootSound("sounds/dirt2.wav"),
+        new GreenfootSound("sounds/dirt3.wav"),
+    };
     
     private Vector3 coord;
     
@@ -71,6 +76,7 @@ public class Block extends Sprack {
     public void delete() {
         super.delete();
         this.blocks.remove(this.coord);
+        breakSounds[Greenfoot.getRandomNumber(3)].play();
     }
     
     public void tick() {
