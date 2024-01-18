@@ -85,6 +85,9 @@ public class MainGame extends Scene {
         this.handlePlaceBlock(mouseInfo);
     }
     
+    /**
+     * Determine which block to break when left mouse button is clicked
+     */
     private void handleBreakBlock(MouseInfo mouseInfo) {
         if (Greenfoot.mousePressed(null) && mouseInfo.getButton() == 1) {
             List<Block> blocks = this.getObjectsAt(mouseInfo.getX(), mouseInfo.getY(), Block.class);
@@ -105,6 +108,9 @@ public class MainGame extends Scene {
         }
     }
     
+    /**
+     * Determine which location to place a block at when right mouse button is clicked
+     */
     private void handlePlaceBlock(MouseInfo mouseInfo) {
         if (Greenfoot.mousePressed(null) && mouseInfo.getButton() == 3) {
             List<Block> blocks = this.getObjectsAt(mouseInfo.getX(), mouseInfo.getY(), Block.class);
@@ -130,6 +136,9 @@ public class MainGame extends Scene {
         }
     }
     
+    /**
+     * Sort the spracks in order of furthest from camera to closest and add them to the scene in that order
+     */
     private void sortSpracks() {
         // Sort the z-index of the spracks
         Collections.sort(Sprack.spracks, new ZIndexComparator(this.camera));

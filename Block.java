@@ -54,6 +54,9 @@ public class Block extends Sprack {
      * @return The face of the block represented as a unit Vector3 pointing in that direction
      */
     public Vector3 getFace(int _x, int _y) {
+        final double sqrt2 = Math.sqrt(2);
+        final double pi = Math.PI;
+        
         // Find the bottom center of the block
         Vector2 centerOffset = this.group.getCenterOffset(this.scene.camera.getVerAngle());
         double ox = this.getX();
@@ -67,6 +70,7 @@ public class Block extends Sprack {
         double x = _x - ox;
         double y = -(_y - oy);
         
+        // Top four edges
         double y1 = b * (x * Math.cos(a) + l / 2) / Math.sin(a) + l;
         double y2 = b * (x * Math.cos(a) - l / 2) / Math.sin(a) + l;
         double y3 = -b * (x * Math.sin(a) + l / 2) / Math.cos(a) + l;
@@ -77,35 +81,40 @@ public class Block extends Sprack {
             return new Vector3(0, 1, 0);
         }
         
-        final double sqrt2 = Math.sqrt(2);
-        final double pi = Math.PI;
+        // Bottom four edges
         double y5 = b * (x * Math.cos(a) + l / 2) / Math.sin(a);
         double y6 = b * (x * Math.cos(a) - l / 2) / Math.sin(a);
         double y7 = -b * (x * Math.sin(a) + l / 2) / Math.cos(a);
         double y8 = -b * (x * Math.sin(a) - l / 2) / Math.cos(a);
         double[] bottomArr = {y5, y6, y7, y8};
         Arrays.sort(bottomArr);
+        
+        // Vertical edges
         double x1 = l / 2 * sqrt2 * Math.cos(a + 1 * pi / 4);
         double x2 = l / 2 * sqrt2 * Math.cos(a + 3 * pi / 4);
         double x3 = l / 2 * sqrt2 * Math.cos(a + 5 * pi / 4);
         double x4 = l / 2 * sqrt2 * Math.cos(a + 7 * pi / 4);
-        // Clockwise starting from quadrant 4
+        // Ordered clockwise starting from the quadrant 4 edge
         double[] xArr = {x1, x2, x3, x4};
         int rot = (int) (Math.toRadians(Math.floorMod((int) Math.toDegrees(a), 360)) / (pi / 2));
         double[] xArr2 = {0, 0, 0, 0};
+        // Rotate the order of vertical edges
         for (int j = 0; j < 4; j++) {
             xArr2[(j + rot) % 4] = xArr[j];
         }
+        
+        // Determine the in-world direction of the face
         if (y < topArr[1] && y > bottomArr[1]) {
-            Vector2 dir1 = new Vector2(0, 1).rotate(-rot * 90);
-            Vector2 dir2 = new Vector2(1, 0).rotate(-rot * 90);
+            Vector2 face1 = new Vector2(0, 1).rotate(-rot * 90);
+            Vector2 face2 = new Vector2(1, 0).rotate(-rot * 90);
             if (x < xArr2[0]) {
-                return new Vector3(dir1.x.get(), 0, dir1.y.get());
+                return new Vector3(face1.x.get(), 0, face1.y.get());
             } else {
-                return new Vector3(dir2.x.get(), 0, dir2.y.get());
+                return new Vector3(face2.x.get(), 0, face2.y.get());
             }
         }
         
+        // None of the faces
         return null;
     }
     
