@@ -1,5 +1,8 @@
 import greenfoot.*;
 
+/**
+ * Superclass for all scenes of this game.
+ */
 public class Scene extends World {
     public static final int PX = 4; // Pixel size
     

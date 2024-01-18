@@ -1,9 +1,15 @@
 import greenfoot.*;
 
+/**
+ * Class that handles player input, movement, and collision
+ */
 public class Player extends Sprack {
     private Vector3 vel;
     private boolean onGround;
     
+    /**
+     * @param scene The MainGame scene that contains the player
+     */
     public Player(MainGame scene) {
         super(scene, scene.playerSprackGroup, 0, 64, 0);
         this.vel = new Vector3(0, 0, 0);

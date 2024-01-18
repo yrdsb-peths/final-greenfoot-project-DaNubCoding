@@ -2,20 +2,15 @@
 
 This project is an attempt at using the Greenfoot framework to create a clone of Minecraft in a third-person orthographic projection, using the sprite stacking technique. 
 
-## Current Roadmap
-
-- A few more block types
+## Features
+- Horizontal camera rotation
+- Vertical camera rotation to a certain extent
+- Player movement
+- Player model
+- Player movement
 - Collision
-- Block breaking and placing
-- World generation
+- Block breaking
+- Controls menu (bring up using the `/` key)
 
-## How to play
-
-- `a` - left
-- `d` - right
-- `w` - forward
-- `s` - backward
-- `left` - rotate camera left
-- `right` - rotate camera right
-- `up` - rotate camera up
-- `down` - rotate camera down
+## For Mr Chan
+There are implementations using arrays in Block.java and SprackGroup.java.
