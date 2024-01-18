@@ -10,6 +10,7 @@ This project is an attempt at using the Greenfoot framework to create a clone of
 - Player movement
 - Collision
 - Block breaking
+- Controls menu (bring up using the `/` key)
 
 ## For Mr Chan
 There are implementations using arrays in Block.java and SprackGroup.java.
