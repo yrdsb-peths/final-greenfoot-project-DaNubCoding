@@ -10,6 +10,7 @@ This project is an attempt at using the Greenfoot framework to create a clone of
 - Player movement
 - Collision
 - Block breaking
+- Block placing
 - Controls menu (bring up using the `/` key)
 
 ## For Mr Chan
