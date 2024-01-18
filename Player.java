@@ -65,6 +65,10 @@ public class Player extends Sprack {
         if (sprack != null) {
             this.pos.z.minus$(this.vel.z);
         }
+        
+        if (this.pos.y.get() < -2000) {
+            this.pos.set(new Vector3(0, 64, 0));
+        }
     }
     
     /**
