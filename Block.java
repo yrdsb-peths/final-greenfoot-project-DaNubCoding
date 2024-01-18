@@ -43,7 +43,7 @@ public class Block extends Sprack {
      * @param coord The coordinates of the block as a Vector3
      */
     public Block(MainGame scene, SprackGroup group, Vector3 coord) {
-        this(scene, group, (int) coord.x.get(), (int) coord.y.get(), (int) coord.z.get());
+        this(scene, group, (int) Math.round(coord.x.get()), (int) Math.round(coord.y.get()), (int) Math.round(coord.z.get()));
     }
     
     /**
